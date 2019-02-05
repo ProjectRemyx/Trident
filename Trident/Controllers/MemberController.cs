@@ -4,16 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Trident.Models;
+using Trident.Models.ViewModels;
 
 namespace Trident.Controllers
 {
     public class MemberController : Controller
     {
-        
-        // GET: Member
+        private MemberContext db = new MemberContext();
+
+        //Run method when no command - Plural members view
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Members");
+        }
+
+        public ActionResult Members()
+        {
+            //Print out a list of members
+            IEnumerable<Member> members = db.Members.ToList();
+            return View(members);
         }
     }
 }
