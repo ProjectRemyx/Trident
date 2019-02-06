@@ -15,10 +15,10 @@ namespace Trident.Controllers
         //Run method when no command - Plural members view
         public ActionResult Index()
         {
-            return RedirectToAction("Members");
+            return RedirectToAction("List");
         }
 
-        public ActionResult Members()
+        public ActionResult List()
         {
             //Print out a list of members
             IEnumerable<Member> members = db.Members.ToList();
