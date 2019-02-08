@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Member</h2>
+@*Goes to Create ActionResult in MemberController when submitted*@
+<form method="post" action="/Member/Create">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" placeholder="Enter username" id="MemberName_New" name="MemberName_New">
+    </div>
+    <div class="form-group">
+        <label>Level</label>
+        <input type="text" class="form-control" placeholder="Level" id="MemberLevel_New" name="MemberLevel_New">
+    </div>
+    <div class="form-group">
+        <label>Role</label>
+        <input type="text" class="form-control" placeholder="Role" id="MemberRole_New" name="MemberRole_New">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

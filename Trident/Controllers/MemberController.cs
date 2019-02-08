@@ -24,5 +24,12 @@ namespace Trident.Controllers
             IEnumerable<Member> members = db.Members.ToList();
             return View(members);
         }
+
+        public ActionResult New()
+        {
+            //Connect to db to get list of members
+            MemberEdit memberEditView = new MemberEdit();
+            return View(memberEditView);
+        }
     }
 }
