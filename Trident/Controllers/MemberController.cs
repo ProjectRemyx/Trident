@@ -48,5 +48,20 @@ namespace Trident.Controllers
 
             return RedirectToAction("List");
         }
+
+        public ActionResult Show(int? id)
+        {
+            //If the id doesn't exist or the member doesn't exist
+            if((id == null) || (db.Members.Find(id)==null))
+            {
+                return HttpNotFound();
+            }
+            string query = "select * from members where memberid=@id";
+            SqlParameter[] myParams = new SqlParameter[1];
+            myParams[0] = new SqlParameter("@id", id);
+
+            Member myMembers = db.Members.SqlQuery(query, myParams).FirstOrDefault();
+            return View(myMembers);
+        }
     }
 }

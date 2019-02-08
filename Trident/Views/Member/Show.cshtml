@@ -1,0 +1,15 @@
+﻿@model Trident.Models.Member
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>@Model.MemberName</h2>
+<div>
+    @Html.ActionLink("Edit", "Edit/"+Model.MemberID)
+</div>
+<h3>Characters:</h3>
+@foreach(var character in Model.Characters)
+{
+    <div>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID,"Character")</div>
+}
+
