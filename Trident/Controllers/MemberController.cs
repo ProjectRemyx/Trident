@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.SqlClient;
 using System.Web;
 using System.Web.Mvc;
 using Trident.Models;
@@ -30,6 +31,22 @@ namespace Trident.Controllers
             //Connect to db to get list of members
             MemberEdit memberEditView = new MemberEdit();
             return View(memberEditView);
+        }
+
+        [HttpPost]
+        public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberRole_New)
+        {
+            //Query
+            string query = "insert into members (MemberName, MemberLevel, MemberRole) values (@name, @level, @role)";
+            SqlParameter[] myParams = new SqlParameter[3];
+            myParams[0] = new SqlParameter("@name", MemberName_New);
+            myParams[1] = new SqlParameter("@level", MemberLevel_New);
+            myParams[2] = new SqlParameter("@role", MemberRole_New);
+
+            //Execute Query
+            db.Database.ExecuteSqlCommand(query, myParams);
+
+            return RedirectToAction("List");
         }
     }
 }

@@ -16,5 +16,12 @@ namespace Trident.Models
 
         public DbSet<Member> Members { get; set; }
         public DbSet<Character> Characters { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //https://stackoverflow.com/questions/3600175/the-model-backing-the-database-context-has-changed-since-the-database-was-crea
+            Database.SetInitializer<MemberContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
