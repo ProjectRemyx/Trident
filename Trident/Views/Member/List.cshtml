@@ -8,24 +8,27 @@
 
 <h2>Members</h2>
 
-<div>
+<div id="addNewMember">
     @Html.ActionLink("Add a member", "New", "Member")
 </div>
 
-@foreach (var member in Model)
-{
-<div class="media">
-    @if (member.HasPic == 1)
+<ul class="list-unstyled">
+
+    @foreach (var member in Model)
     {
-        <img class="mr-3" src="~/imgs/members/@(member.MemberID).@(member.ImgType)">
+        <div class="media">
+            @if (member.HasPic == 1)
+            {
+                <img class="mr-3" src="~/imgs/members/@(member.MemberID).@(member.ImgType)">
+            }
+            else
+            {
+                <img src="~/imgs/members/default.png" />
+            }
+            <div class="media-body">
+                <h5 class="mt-0">@member.MemberName</h5>
+                Role: @member.MemberRole, @member.Characters.Count() Characters
+            </div>
+        </div>
     }
-    else
-    {
-        <img src="~/imgs/authors/default.jpg" />
-    }
-    <div class="media-body">
-        <h5 class="mt-0">@member.MemberName</h5>
-        @member.MemberRole, @member.Characters.Count()
-    </div>
-</div>
-}
+</ul>

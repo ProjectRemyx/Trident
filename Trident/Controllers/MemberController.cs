@@ -34,15 +34,15 @@ namespace Trident.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberRole_New)
+        public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberRole_New, int HasPic_New)
         {
             //Query
-            string query = "insert into members (MemberName, MemberLevel, MemberRole) values (@name, @level, @role)";
-            SqlParameter[] myParams = new SqlParameter[3];
+            string query = "insert into members (MemberName, MemberLevel, MemberRole, HasPic) values (@name, @level, @role, @pic)";
+            SqlParameter[] myParams = new SqlParameter[4];
             myParams[0] = new SqlParameter("@name", MemberName_New);
             myParams[1] = new SqlParameter("@level", MemberLevel_New);
             myParams[2] = new SqlParameter("@role", MemberRole_New);
-
+            myParams[3] = new SqlParameter("@pic", HasPic_New);
             //Execute Query
             db.Database.ExecuteSqlCommand(query, myParams);
 
