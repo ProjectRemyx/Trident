@@ -1,0 +1,34 @@
+﻿@model Trident.Models.ViewModels.MemberEdit
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post" action="/Member/Edit/@Model.member.MemberID">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" value="@Model.member.MemberName" id="MemberName" name="MemberName">
+    </div>
+    <div class="form-group">
+        <label>Level</label>
+        <input type="text" class="form-control" value="@Model.member.MemberLevel" id="MemberLevel" name="MemberLevel">
+    </div>
+    <div class="form-group">
+        <label>Role</label>
+        <input type="text" class="form-control" value="@Model.member.MemberRole" id="MemberRole" name="MemberRole">
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="HasPic" id="HasPicFalse" value="0" checked>
+        <label class="form-check-label" for="radios1">
+            Does not have picture
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="HasPic" id="HasPicTrue" value="1">
+        <label class="form-check-label" for="radios1">
+            Has a picture
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

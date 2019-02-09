@@ -208,6 +208,7 @@
     <Content Include="Views\Member\List.cshtml" />
     <Content Include="Views\Member\New.cshtml" />
     <Content Include="Views\Member\Show.cshtml" />
+    <Content Include="Views\Member\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
