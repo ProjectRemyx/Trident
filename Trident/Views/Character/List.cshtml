@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Trident.Models.Character>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>Characters</h2>
+
+<div id="addNewMember">
+    @Html.ActionLink("Add character", "New")
+</div>
+
+<ul class="list-unstyled">
+
+    @foreach (var character in Model)
+    {
+        <div class="media">
+                <img class="mr-3" src="~/imgs/characters/(@character.CharacterName).png">
+                <div class="media-body">
+                    <h5 class="mt-0">@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID)</h5>
+                    Unique Weapon Level: @character.CharacterWeapon Role: @character.CharacterRole, Character Type: @character.CharacterType
+                </div>
+            <div>
+                <a href="@Url.Action("Delete/" + character.CharacterID)">Delete</a>
+            </div>
+        </div>
+    }
+</ul>

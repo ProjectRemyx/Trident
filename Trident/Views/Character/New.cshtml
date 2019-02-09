@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Trident.Models.Member>
+    @{
+        ViewBag.Title = "New";
+    }
+
+    <h2>New Character</h2>
+
+    <form method="post" action="/Character/Create">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Character name" id="CharacterName_New" name="CharacterName_New">
+        </div>
+        <div class="form-group">
+            <label>Role</label>
+            <input type="text" class="form-control" placeholder="Role" id="CharacterRole_New" name="CharacterRole_New">
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <input type="text" class="form-control" placeholder="Type" id="CharacterType_New" name="CharacterType_New">
+        </div>
+        <div class="form-group">
+            <label>Character Weapon</label>
+            <select class="form-control" id="CharacterWeapon_New" name="CharacterWeapon_New">
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>

@@ -1,0 +1,12 @@
+﻿@model Trident.Models.Character
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>@Model.CharacterName</h2>
+<div>
+    @Html.ActionLink("Edit", "Edit/" + Model.CharacterID)
+</div>
+<h3>@Model.CharacterRole</h3>
+<h3>@Model.CharacterType</h3>
+<h3>@Model.CharacterWeapon</h3>

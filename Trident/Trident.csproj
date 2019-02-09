@@ -159,6 +159,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902071826136_InitialCreate.cs" />
+    <Compile Include="Migrations\201902071826136_InitialCreate.Designer.cs">
+      <DependentUpon>201902071826136_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902092117516_init.cs" />
+    <Compile Include="Migrations\201902092117516_init.Designer.cs">
+      <DependentUpon>201902092117516_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberContext.cs" />
@@ -209,10 +218,12 @@
     <Content Include="Views\Member\New.cshtml" />
     <Content Include="Views\Member\Show.cshtml" />
     <Content Include="Views\Member\Edit.cshtml" />
+    <Content Include="Views\Character\List.cshtml" />
+    <Content Include="Views\Character\New.cshtml" />
+    <Content Include="Views\Character\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Character\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -226,6 +237,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902071826136_InitialCreate.resx">
+      <DependentUpon>201902071826136_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902092117516_init.resx">
+      <DependentUpon>201902092117516_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

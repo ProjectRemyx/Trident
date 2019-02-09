@@ -10,6 +10,7 @@
     @Html.ActionLink("Edit", "Edit/"+Model.MemberID)
 </div>
 <h4>Characters:</h4>
+@Html.ActionLink("Add Character", "New/", "Character")
 @foreach(var character in Model.Characters)
 {
     <div>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID,"Character")</div>

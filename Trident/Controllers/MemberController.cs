@@ -36,7 +36,7 @@ namespace Trident.Controllers
         [HttpPost]
         public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberRole_New, int HasPic_New)
         {
-            //Query put into a string
+            //Query string
             string query = "insert into members (MemberName, MemberLevel, MemberRole, HasPic) values (@name, @level, @role, @pic)";
 
             //Parameters for the query

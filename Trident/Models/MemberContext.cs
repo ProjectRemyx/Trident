@@ -11,7 +11,7 @@ namespace Trident.Models
         //Empty Constructor
         public MemberContext()
         {
-
+            
         }
 
         public DbSet<Member> Members { get; set; }
@@ -23,5 +23,6 @@ namespace Trident.Models
             Database.SetInitializer<MemberContext>(null);
             base.OnModelCreating(modelBuilder);
         }
+        
     }
 }
