@@ -95,5 +95,22 @@ namespace Trident.Controllers
             return RedirectToAction("Show/" + id);
         }
 
+        public ActionResult Delete(int? id)
+        {
+            if ((id == null) || (db.Members.Find(id) == null))
+            {
+                return HttpNotFound();
+            }
+            string query;
+            SqlParameter param = new SqlParameter("@id", id);
+
+            //Delete member
+            query = "delete from members where MemberID=@id";
+            param = new SqlParameter("@id", id);
+            db.Database.ExecuteSqlCommand(query, param);
+            return RedirectToAction("List");
+
+        }
+        
     }
 }

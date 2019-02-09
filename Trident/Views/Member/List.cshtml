@@ -29,6 +29,9 @@
                     <h5 class="mt-0">@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</h5>
                     Role: @member.MemberRole, Level: @member.MemberLevel, Characters: @member.Characters.Count()
                 </div>
+                <div>
+                    <a href="@Url.Action("Delete/" + member.MemberID)">Delete</a>
+                </div>
         </div>
     }
 </ul>

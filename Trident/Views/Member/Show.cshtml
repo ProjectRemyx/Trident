@@ -4,10 +4,12 @@
 }
 
 <h2>@Model.MemberName</h2>
+<h3>Level @Model.MemberLevel</h3>
+<h3>Role: @Model.MemberRole</h3>
 <div>
     @Html.ActionLink("Edit", "Edit/"+Model.MemberID)
 </div>
-<h3>Characters:</h3>
+<h4>Characters:</h4>
 @foreach(var character in Model.Characters)
 {
     <div>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID,"Character")</div>
