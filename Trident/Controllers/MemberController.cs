@@ -76,6 +76,24 @@ namespace Trident.Controllers
             return View(memberEditView);
         }
 
+        [HttpPost]
+        public ActionResult Edit(int id, string MemberName, int MemberLevel, string MemberRole, int HasPic)
+        {
+            if((id == null) || (db.Members.Find(id) == null))
+            {
+                return HttpNotFound();
+            }
+            string query = "update members set MemberName=@name, MemberLevel=@level, MemberRole=@role, HasPic=@pic where MemberID=@id";
+            SqlParameter[] myParams = new SqlParameter[5];
+            myParams[0] = new SqlParameter("@name", MemberName);
+            myParams[1] = new SqlParameter("@level", MemberLevel);
+            myParams[2] = new SqlParameter("@role", MemberRole);
+            myParams[3] = new SqlParameter("@id", id);
+            myParams[4] = new SqlParameter("@pic", HasPic);
+
+            db.Database.ExecuteSqlCommand(query, myParams);
+            return RedirectToAction("Show/" + id);
+        }
 
     }
 }

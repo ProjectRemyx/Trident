@@ -25,10 +25,10 @@
             {
                 <img src="~/imgs/members/default.png" />
             }
-            <div class="media-body">
-                <h5 class="mt-0">@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</h5>
-                Role: @member.MemberRole, @member.Characters.Count() Characters
-            </div>
+                <div class="media-body">
+                    <h5 class="mt-0">@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</h5>
+                    Role: @member.MemberRole, Level: @member.MemberLevel, Characters: @member.Characters.Count()
+                </div>
         </div>
     }
 </ul>
