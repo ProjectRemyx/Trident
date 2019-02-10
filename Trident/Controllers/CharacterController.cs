@@ -25,16 +25,17 @@ namespace Trident.Controllers
         }
         
         [HttpPost]
-        public ActionResult Create(string CharacterName_New, string CharacterRole_New, string CharacterType_New, int CharacterWeapon_New)
+        public ActionResult Create(string CharacterName_New, string CharacterRole_New, string CharacterType_New, int CharacterWeapon_New, int? CharacterMember_New)
         {
             //Query string 
-            string query = "insert into characters(CharacterName, CharacterRole, CharacterType, CharacterWeapon) values (@name, @role, @type, @weapon)";
+            string query = "insert into characters(CharacterName, CharacterRole, CharacterType, CharacterWeapon, member_MemberID) values (@name, @role, @type, @weapon, @mid)";
 
-            SqlParameter[] myParams = new SqlParameter[4];
+            SqlParameter[] myParams = new SqlParameter[5];
             myParams[0] = new SqlParameter("@name", CharacterName_New);
             myParams[1] = new SqlParameter("@role", CharacterRole_New);
             myParams[2] = new SqlParameter("@type", CharacterType_New);
             myParams[3] = new SqlParameter("@weapon", CharacterWeapon_New);
+            myParams[4] = new SqlParameter("@mid", CharacterMember_New);
 
             db.Database.ExecuteSqlCommand(query, myParams);
             return RedirectToAction("List");
@@ -50,5 +51,47 @@ namespace Trident.Controllers
         {
             return View(db.Characters.ToList());
         }
+
+        public ActionResult Edit(int? id)
+        {
+            CharacterEdit characterEdit = new CharacterEdit();
+            characterEdit.character = db.Characters.Find(id);
+            characterEdit.members = db.Members.ToList();
+            
+            if(characterEdit.character != null)
+            {
+                return View(characterEdit);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //[HttpPost]
+        //public ActionResult Edit(int? id, string CharacterName, string CharacterRole, string CharacterType, int CharacterWeapon)
+        //{
+        //    if((id == null) || (db.Characters.Find(id) == null))
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    string query = "update characters set CharacterName=@name, " +
+        //        "CharacterRole=@role," +
+        //        "CharacterType=@type," +
+        //        "CharacterWeapon=@weapon where CharacterID=@id";
+
+            
+
+        //}
+
+        public ActionResult Delete(int id)
+        {
+            string query = "delete from characters where characterid = @id";
+            db.Database.ExecuteSqlCommand(query, new SqlParameter("@id", id));
+
+            return RedirectToAction("List");
+        }
+
     }
 }

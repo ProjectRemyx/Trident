@@ -7,6 +7,15 @@
 
     <form method="post" action="/Character/Create">
         <div class="form-group">
+            <label>Member</label>
+            <select class="form-control" id="CharacterMember_New" name="CharacterMember_New">
+                @foreach (var member in Model)
+                {
+                    <option value="@member.MemberID">@member.MemberName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" placeholder="Character name" id="CharacterName_New" name="CharacterName_New">
         </div>
@@ -21,12 +30,12 @@
         <div class="form-group">
             <label>Character Weapon</label>
             <select class="form-control" id="CharacterWeapon_New" name="CharacterWeapon_New">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
