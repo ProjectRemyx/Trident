@@ -68,22 +68,50 @@ namespace Trident.Controllers
             }
         }
 
-        //[HttpPost]
-        //public ActionResult Edit(int? id, string CharacterName, string CharacterRole, string CharacterType, int CharacterWeapon)
-        //{
-        //    if((id == null) || (db.Characters.Find(id) == null))
-        //    {
-        //        return HttpNotFound();
-        //    }
+        [HttpPost]
+        public ActionResult Edit(int? id, string CharacterName, string CharacterRole, string CharacterType, int CharacterWeapon, int? CharacterMember)
+        {
+            if ((id == null) || (db.Characters.Find(id) == null))
+            {
+                return HttpNotFound();
+            }
 
-        //    string query = "update characters set CharacterName=@name, " +
-        //        "CharacterRole=@role," +
-        //        "CharacterType=@type," +
-        //        "CharacterWeapon=@weapon where CharacterID=@id";
+            string query = "update characters set CharacterName=@name, " +
+                "CharacterRole=@role," +
+                "CharacterType=@type," +
+                "CharacterWeapon=@weapon,"+
+                "member_MemberID=@mid where CharacterID=@id";
 
-            
+            SqlParameter[] myParams = new SqlParameter[6];
+            myParams[0] = new SqlParameter();
+            myParams[0].ParameterName = "@name";
+            myParams[0].Value = CharacterName;
 
-        //}
+            myParams[1] = new SqlParameter();
+            myParams[1].ParameterName = "@role";
+            myParams[1].Value = CharacterRole;
+
+            myParams[2] = new SqlParameter();
+            myParams[2].ParameterName = "@type";
+            myParams[2].Value = CharacterType;
+
+            myParams[3] = new SqlParameter();
+            myParams[3].ParameterName = "@weapon";
+            myParams[3].Value = CharacterWeapon;
+
+            myParams[4] = new SqlParameter();
+            myParams[4].ParameterName = "mid";
+            myParams[4].Value = CharacterMember;
+
+            myParams[5] = new SqlParameter();
+            myParams[5].ParameterName = "@id";
+            myParams[5].Value = id;
+
+            db.Database.ExecuteSqlCommand(query, myParams);
+
+            return RedirectToAction("Show/" + id);
+
+        }
 
         public ActionResult Delete(int id)
         {
