@@ -1,64 +1,68 @@
 ﻿@model IEnumerable<Trident.Models.Member>
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Members";
+    ViewBag.Title = "Members";
 }
 
 <h2>Members</h2>
 
-<div id="addNewMember">
-    @Html.ActionLink("Add a member", "New", "Member")
-</div>
+@*Old action link to add a new member*@
+@*<div id="addNewMember">
+@Html.ActionLink("Add a member", "New", "Member")
+</div>*@
 
-@*Old View*@
-@*<ul class="list-unstyled">
+<form method="get" action="/Member/New">
+    <button type="submit" class="btn btn-primary">Add Member</button>
+</form>
+    @*Old View*@
+    @*<ul class="list-unstyled">
 
-    @foreach (var member in Model)
-    { 
-        <div class="media">
-            @if (member.HasPic == 1)
+            @foreach (var member in Model)
             {
-                <img class="mr-3" src="~/imgs/members/@(member.MemberID).@(member.ImgType)">
-            }
-            else
-            {
-                <img src="~/imgs/members/default.png" />
-            }
-                <div class="media-body">
-                    <h5 class="mt-0">@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</h5>
-                    Role: @member.MemberRole, Level: @member.MemberLevel, Characters: @member.Characters.Count()
+                <div class="media">
+                    @if (member.HasPic == 1)
+                    {
+                        <img class="mr-3" src="~/imgs/members/@(member.MemberID).@(member.ImgType)">
+                    }
+                    else
+                    {
+                        <img src="~/imgs/members/default.png" />
+                    }
+                        <div class="media-body">
+                            <h5 class="mt-0">@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</h5>
+                            Role: @member.MemberRole, Level: @member.MemberLevel, Characters: @member.Characters.Count()
+                        </div>
+                        <div>
+                            <a href="@Url.Action("Delete/" + member.MemberID)">Delete</a>
+                        </div>
                 </div>
-                <div>
-                    <a href="@Url.Action("Delete/" + member.MemberID)">Delete</a>
-                </div>
-        </div>
-    }
-</ul>*@
+            }
+        </ul>*@
 
-@*New View*@
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Member</th>
-            <th scope="col">Level</th>
-            <th scope="col">Role</th>
-            <th scope="col">Characters</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var member in Model)
-        {
-        <tr>
-            <th scope="row"></th>
-            <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
-            <td>@member.MemberLevel</td>
-            <td>@member.MemberRole</td>
-            <td>@member.Characters.Count()</td>
-            <td><a href="@Url.Action("Delete/" + member.MemberID)">Delete</a></td>
-        </tr>
-        }
-    </tbody>
-</table>
+    @*New View*@
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Member</th>
+                <th scope="col">Level</th>
+                <th scope="col">Role</th>
+                <th scope="col">Characters</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var member in Model)
+            {
+                <tr>
+                    <th scope="row"></th>
+                    <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
+                    <td>@member.MemberLevel</td>
+                    <td>@member.MemberRole</td>
+                    <td>@member.Characters.Count()</td>
+                    <td><a href="@Url.Action("Delete/" + member.MemberID)">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
