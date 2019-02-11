@@ -7,7 +7,7 @@
 
     <form method="post" action="/Character/Edit/@Model.character.CharacterID">
         <div class="form-group">
-            <label>Member</label>
+            <label>Belongs to:</label>
             <select class="form-control" id="CharacterMember" name="CharacterMember">
                 @foreach (var member in Model.members)
                 {

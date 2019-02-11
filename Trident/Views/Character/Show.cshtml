@@ -4,9 +4,31 @@
 }
 
 <h2>@Model.CharacterName</h2>
-<div>
-    @Html.ActionLink("Edit", "Edit/" + Model.CharacterID)
-</div>
-<h3>@Model.CharacterRole</h3>
-<h3>@Model.CharacterType</h3>
-<h3>@Model.CharacterWeapon</h3>
+@*Old edit link*@
+@*<div>
+        @Html.ActionLink("Edit", "Edit/" + Model.CharacterID)
+    </div>*@
+<form method="get" action="/Character/Edit/@Model.CharacterID">
+    <button type="submit" class="btn btn-primary">Edit Character</button>
+</form>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Role</th>
+            <th scope="col">Type</th>
+            <th scope="col">Weapon Level</th>
+            <th scope="col">Belongs To</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td>@Model.CharacterRole</td>
+                <td>@Model.CharacterType</td>
+                <td>@Model.CharacterWeapon</td>
+                <td>@Model.member.MemberName</td>
+            </tr>
+    </tbody>
+</table>
