@@ -104,11 +104,18 @@ namespace Trident.Controllers
             string query;
             SqlParameter param = new SqlParameter("@id", id);
 
+            //Delete associated characters
+            query = "delete from characters where member_MemberID=@id";
+            param = new SqlParameter("@id", id);
+            db.Database.ExecuteSqlCommand(query, param);
+            
             //Delete member
             query = "delete from members where MemberID=@id";
             param = new SqlParameter("@id", id);
             db.Database.ExecuteSqlCommand(query, param);
             return RedirectToAction("List");
+
+
 
         }
         

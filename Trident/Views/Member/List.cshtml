@@ -12,10 +12,11 @@
     @Html.ActionLink("Add a member", "New", "Member")
 </div>
 
-<ul class="list-unstyled">
+@*Old View*@
+@*<ul class="list-unstyled">
 
     @foreach (var member in Model)
-    {
+    { 
         <div class="media">
             @if (member.HasPic == 1)
             {
@@ -34,4 +35,30 @@
                 </div>
         </div>
     }
-</ul>
+</ul>*@
+
+@*New View*@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Member</th>
+            <th scope="col">Level</th>
+            <th scope="col">Role</th>
+            <th scope="col">Characters</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var member in Model)
+        {
+        <tr>
+            <th scope="row"></th>
+            <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
+            <td>@member.MemberLevel</td>
+            <td>@member.MemberRole</td>
+            <td>@member.Characters.Count()</td>
+            <td><a href="@Url.Action("Delete/" + member.MemberID)">Delete</a></td>
+        </tr>
+        }
+    </tbody>
+</table>
