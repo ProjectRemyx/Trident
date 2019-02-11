@@ -118,7 +118,9 @@ namespace Trident.Controllers
             string query = "delete from characters where characterid = @id";
             db.Database.ExecuteSqlCommand(query, new SqlParameter("@id", id));
 
-            return RedirectToAction("List");
+            //How to redirect to another controller referenced from the following link
+            //https://stackoverflow.com/questions/10785245/redirect-to-action-in-another-controller
+            return RedirectToAction("List", "Member", new { area = "" });
         }
 
     }
