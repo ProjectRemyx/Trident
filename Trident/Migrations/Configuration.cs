@@ -10,7 +10,6 @@ namespace Trident.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Trident.Models.MemberContext";
         }
 
         protected override void Seed(Trident.Models.MemberContext context)
