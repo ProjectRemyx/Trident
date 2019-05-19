@@ -15,14 +15,11 @@ namespace Trident.Models
         [Required, StringLength(30, ErrorMessage = "Name cannot be longer than 30 characters.")]
         public string CharacterName { get; set; }
 
-        [Required, StringLength(30, ErrorMessage = "Role cannot be longer than 30 characters.")]
-        public string CharacterRole { get; set; }
-
-        [Required, StringLength(30, ErrorMessage = "Type cannot be longer than 30 characters.")]
-        public string CharacterType { get; set; }
-
         [Required]
         public int CharacterWeapon { get; set; }
+
+        [Required]
+        public int CharacterTreasure { get; set; }
 
         //Represent one member to many characters
         public virtual Member member { get; set; }

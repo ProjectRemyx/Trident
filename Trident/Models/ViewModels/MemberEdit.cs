@@ -15,5 +15,7 @@ namespace Trident.Models.ViewModels
         
         //To edit a member need a list of members
         public virtual Member member { get; set; }
+
+
     }
 }
