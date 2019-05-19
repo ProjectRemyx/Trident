@@ -34,17 +34,17 @@ namespace Trident.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberRole_New, int HasPic_New)
+        public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberSpecialty_New, int MemberStrikes_New)
         {
             //Query string
-            string query = "insert into members (MemberName, MemberLevel, MemberRole, HasPic) values (@name, @level, @role, @pic)";
+            string query = "insert into members (MemberName, MemberLevel, MemberSpecialty, MemberStrikes) values (@name, @level, @specialty, @strikes)";
 
             //Parameters for the query
             SqlParameter[] myParams = new SqlParameter[4];
             myParams[0] = new SqlParameter("@name", MemberName_New);
             myParams[1] = new SqlParameter("@level", MemberLevel_New);
-            myParams[2] = new SqlParameter("@role", MemberRole_New);
-            myParams[3] = new SqlParameter("@pic", HasPic_New);
+            myParams[2] = new SqlParameter("@specialty", MemberSpecialty_New);
+            myParams[3] = new SqlParameter("@strikes", MemberStrikes_New);
             
             //Execute Query
             db.Database.ExecuteSqlCommand(query, myParams);
@@ -77,19 +77,19 @@ namespace Trident.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, string MemberName, int MemberLevel, string MemberRole, int HasPic)
+        public ActionResult Edit(int id, string MemberName, int MemberLevel, string MemberSpecialty, int MemberStrikes)
         {
             if((id == null) || (db.Members.Find(id) == null))
             {
                 return HttpNotFound();
             }
-            string query = "update members set MemberName=@name, MemberLevel=@level, MemberRole=@role, HasPic=@pic where MemberID=@id";
+            string query = "update members set MemberName=@name, MemberLevel=@level, MemberSpecialty=@specialty, MemberStrikes=@strikes where MemberID=@id";
             SqlParameter[] myParams = new SqlParameter[5];
             myParams[0] = new SqlParameter("@name", MemberName);
             myParams[1] = new SqlParameter("@level", MemberLevel);
-            myParams[2] = new SqlParameter("@role", MemberRole);
+            myParams[2] = new SqlParameter("@specialty", MemberSpecialty);
             myParams[3] = new SqlParameter("@id", id);
-            myParams[4] = new SqlParameter("@pic", HasPic);
+            myParams[4] = new SqlParameter("@strikes", MemberStrikes);
 
             db.Database.ExecuteSqlCommand(query, myParams);
             return RedirectToAction("Show/" + id);
@@ -114,8 +114,6 @@ namespace Trident.Controllers
             param = new SqlParameter("@id", id);
             db.Database.ExecuteSqlCommand(query, param);
             return RedirectToAction("List");
-
-
 
         }
         

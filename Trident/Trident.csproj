@@ -171,12 +171,18 @@
     <Compile Include="Migrations\201905162347284_MemberContext.Designer.cs">
       <DependentUpon>201905162347284_MemberContext.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905192253110_Trident.cs" />
+    <Compile Include="Migrations\201905192253110_Trident.Designer.cs">
+      <DependentUpon>201905192253110_Trident.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\MemberContext.cs" />
+    <Compile Include="Models\Team.cs" />
     <Compile Include="Models\ViewModels\CharacterEdit.cs" />
     <Compile Include="Models\ViewModels\MemberEdit.cs" />
+    <Compile Include="Models\ViewModels\TeamEdit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905162347284_MemberContext.resx">
       <DependentUpon>201905162347284_MemberContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905192253110_Trident.resx">
+      <DependentUpon>201905192253110_Trident.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
