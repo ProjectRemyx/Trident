@@ -25,17 +25,16 @@ namespace Trident.Controllers
         }
         
         [HttpPost]
-        public ActionResult Create(string CharacterName_New, string CharacterRole_New, string CharacterType_New, int CharacterWeapon_New, int? CharacterMember_New)
+        public ActionResult Create(string CharacterName_New, int CharacterWeapon_New, int CharacterTreasure_New, int? CharacterMember_New)
         {
             //Query string 
-            string query = "insert into characters(CharacterName, CharacterRole, CharacterType, CharacterWeapon, member_MemberID) values (@name, @role, @type, @weapon, @mid)";
+            string query = "insert into characters(CharacterName, CharacterWeapon, CharacterTreasure, member_MemberID) values (@name, @weapon, @treasure, @mid)";
 
-            SqlParameter[] myParams = new SqlParameter[5];
+            SqlParameter[] myParams = new SqlParameter[4];
             myParams[0] = new SqlParameter("@name", CharacterName_New);
-            myParams[1] = new SqlParameter("@role", CharacterRole_New);
-            myParams[2] = new SqlParameter("@type", CharacterType_New);
-            myParams[3] = new SqlParameter("@weapon", CharacterWeapon_New);
-            myParams[4] = new SqlParameter("@mid", CharacterMember_New);
+            myParams[1] = new SqlParameter("@weapon", CharacterWeapon_New);
+            myParams[2] = new SqlParameter("@treasure", CharacterTreasure_New);
+            myParams[3] = new SqlParameter("@mid", CharacterMember_New);
 
             db.Database.ExecuteSqlCommand(query, myParams);
             return RedirectToAction("List");
@@ -69,7 +68,7 @@ namespace Trident.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int? id, string CharacterName, string CharacterRole, string CharacterType, int CharacterWeapon, int? CharacterMember)
+        public ActionResult Edit(int? id, string CharacterName, int CharacterWeapon, int CharacterTreasure, int? CharacterMember)
         {
             if ((id == null) || (db.Characters.Find(id) == null))
             {
@@ -77,35 +76,30 @@ namespace Trident.Controllers
             }
 
             string query = "update characters set CharacterName=@name, " +
-                "CharacterRole=@role," +
-                "CharacterType=@type," +
                 "CharacterWeapon=@weapon,"+
+                "CharacterTreasure=@treasure," +
                 "member_MemberID=@mid where CharacterID=@id";
 
-            SqlParameter[] myParams = new SqlParameter[6];
+            SqlParameter[] myParams = new SqlParameter[5];
             myParams[0] = new SqlParameter();
             myParams[0].ParameterName = "@name";
             myParams[0].Value = CharacterName;
 
             myParams[1] = new SqlParameter();
-            myParams[1].ParameterName = "@role";
-            myParams[1].Value = CharacterRole;
+            myParams[1].ParameterName = "@weapon";
+            myParams[1].Value = CharacterWeapon;
 
             myParams[2] = new SqlParameter();
-            myParams[2].ParameterName = "@type";
-            myParams[2].Value = CharacterType;
+            myParams[2].ParameterName = "@treasure";
+            myParams[2].Value = CharacterTreasure;
 
             myParams[3] = new SqlParameter();
-            myParams[3].ParameterName = "@weapon";
-            myParams[3].Value = CharacterWeapon;
+            myParams[3].ParameterName = "mid";
+            myParams[3].Value = CharacterMember;
 
             myParams[4] = new SqlParameter();
-            myParams[4].ParameterName = "mid";
-            myParams[4].Value = CharacterMember;
-
-            myParams[5] = new SqlParameter();
-            myParams[5].ParameterName = "@id";
-            myParams[5].Value = id;
+            myParams[4].ParameterName = "@id";
+            myParams[4].Value = id;
 
             db.Database.ExecuteSqlCommand(query, myParams);
 
