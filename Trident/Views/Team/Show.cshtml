@@ -1,0 +1,50 @@
+﻿@model Trident.Models.Team
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamRep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamRep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamMembers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TeamMembers)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
