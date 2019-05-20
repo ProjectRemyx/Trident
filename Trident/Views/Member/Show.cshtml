@@ -5,18 +5,13 @@
 
 <h2>@Model.MemberName</h2>
 <h4>Level: @Model.MemberLevel</h4>
-<h4>Role: @Model.MemberRole</h4>
-@*Old edit member link*@
-@*<div>
-    @Html.ActionLink("Edit", "Edit/"+Model.MemberID)
-</div>*@
+<h4>Specialty: @Model.MemberSpecialty</h4>
+<h4>Strikes: @Model.MemberStrikes</h4>
 <form method="get" action="/Member/Edit/@Model.MemberID">
     <button type="submit" class="btn btn-primary">Edit Member</button>
 </form>
 <div id="characterList">
     <h3>Characters:</h3>
-    @*Old add new character link*@
-    @*@Html.ActionLink("Add Character", "New/", "Character")*@
     <form method="get" action="/Character/New">
         <button type="submit" class="btn btn-primary">Add Character</button>
     </form>
@@ -25,30 +20,22 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Character</th>
-                <th scope="col">Role</th>
-                <th scope="col">Type</th>
                 <th scope="col">Weapon Level</th>
+                <th scope="col">Treasure Level</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var character in Model.Characters)
             {
-                <tr>
-                    <th scope="row"></th>
-                    <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
-                    <td>@character.CharacterRole</td>
-                    <td>@character.CharacterType</td>
-                    <td>@character.CharacterWeapon</td>
-                    <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
-                </tr>
+            <tr>
+                <th scope="row"></th>
+                <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
+                <td>@character.CharacterWeapon</td>
+                <td>@character.CharacterTreasure</td>
+                <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
+            </tr>
             }
         </tbody>
     </table>
-    @*Old character list*@
-    @*@foreach (var character in Model.Characters)
-    {
-        <div>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</div>
-    }*@
-
 </div>
 

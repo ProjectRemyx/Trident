@@ -19,13 +19,15 @@
                 <th scope="col">Level</th>
                 <th scope="col">Specialty</th>
                 <th scope="col">Strikes</th>
+                <th scope="col">Character Count</th>
             </tr>
         </thead>
         <tbody>
+            @{ int rowNo = 0;}
             @foreach (var member in Model)
             {
                 <tr>
-                    <th scope="row"></th>
+                    <th scope="row">@{rowNo++;} @rowNo</th>
                     <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
                     <td>@member.MemberLevel</td>
                     <td>@member.MemberSpecialty</td>
