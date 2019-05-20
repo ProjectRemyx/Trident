@@ -37,7 +37,7 @@ namespace Trident.Controllers
         public ActionResult Create(string TeamName_New, string TeamRep_New, string TeamType_New)
         {
             //Query string
-            string query = "insert into teams (TeamName, TeamRep, TeamType, member_MemberID) values (@name, @rep, @type)";
+            string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
 
             //Parameters for the query
             SqlParameter[] myParams = new SqlParameter[3];
