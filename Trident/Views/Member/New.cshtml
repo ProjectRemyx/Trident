@@ -7,6 +7,15 @@
 @*Goes to Create ActionResult in MemberController when submitted*@
 <form method="post" action="/Member/Create">
     <div class="form-group">
+        <label for="CharacterMember_New">Belongs to:</label>
+        <select class="form-control" id="CharacterMember_New" name="CharacterMember_New">
+            @foreach (var member in Model)
+            {
+                <option value="@member.MemberID">@member.MemberName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
         <label for="MemberName_New">Username</label>
         <input type="text" class="form-control" placeholder="Enter username" id="MemberName_New" name="MemberName_New">
     </div>
