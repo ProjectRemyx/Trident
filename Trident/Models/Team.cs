@@ -22,10 +22,8 @@ namespace Trident.Models
         [Required, StringLength(30, ErrorMessage = "Type cannot be longer than 30 characters.")]
         public string TeamType { get; set; }
 
-        [Required]
-        public int TeamMembers { get; set; }
-
         //Represent one team has multiple members
         public virtual ICollection<Member> Members { get; set; }
+
     }
 }

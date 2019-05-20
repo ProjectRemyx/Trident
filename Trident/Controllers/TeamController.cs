@@ -34,17 +34,16 @@ namespace Trident.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string TeamName_New, string TeamRep_New, string TeamType_New, int TeamMembers_New)
+        public ActionResult Create(string TeamName_New, string TeamRep_New, string TeamType_New)
         {
             //Query string
-            string query = "insert into teams (TeamName, TeamRep, TeamType, TeamMembers) values (@name, @rep, @type, @members)";
+            string query = "insert into teams (TeamName, TeamRep, TeamType, member_MemberID) values (@name, @rep, @type)";
 
             //Parameters for the query
-            SqlParameter[] myParams = new SqlParameter[4];
+            SqlParameter[] myParams = new SqlParameter[3];
             myParams[0] = new SqlParameter("@name", TeamName_New);
             myParams[1] = new SqlParameter("@rep", TeamRep_New);
             myParams[2] = new SqlParameter("@type", TeamType_New);
-            myParams[3] = new SqlParameter("@members", TeamMembers_New);
 
             //Execute Query
             db.Database.ExecuteSqlCommand(query, myParams);
