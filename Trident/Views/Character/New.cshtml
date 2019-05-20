@@ -3,33 +3,36 @@
         ViewBag.Title = "New";
     }
 
-    <h2>New Character</h2>
+    <h2>Add Character</h2>
 
     <form method="post" action="/Character/Create">
         <div class="form-group">
-            <label>Belongs to:</label>
+            <label for="CharacterMember_New">Belongs to:</label>
             <select class="form-control" id="CharacterMember_New" name="CharacterMember_New">
                 @foreach (var member in Model)
                 {
-                    <option value="@member.MemberID">@member.MemberName</option>
+                <option value="@member.MemberID">@member.MemberName</option>
                 }
             </select>
         </div>
         <div class="form-group">
-            <label>Name</label>
+            <label for="CharacterName_New">Name</label>
             <input type="text" class="form-control" placeholder="Character name" id="CharacterName_New" name="CharacterName_New">
         </div>
         <div class="form-group">
-            <label>Role</label>
-            <input type="text" class="form-control" placeholder="Role" id="CharacterRole_New" name="CharacterRole_New">
-        </div>
-        <div class="form-group">
-            <label>Type</label>
-            <input type="text" class="form-control" placeholder="Type" id="CharacterType_New" name="CharacterType_New">
-        </div>
-        <div class="form-group">
-            <label>Character Weapon</label>
+            <label for="CharacterWeapon_New">Character Weapon</label>
             <select class="form-control" id="CharacterWeapon_New" name="CharacterWeapon_New">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Character Treasure</label>
+            <select class="form-control" id="CharacterTreasure_New" name="CharacterTreasure_New">
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

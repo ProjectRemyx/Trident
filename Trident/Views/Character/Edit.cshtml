@@ -12,7 +12,7 @@
                 @foreach (var member in Model.members)
                 {
                     string current = "";
-                    if(member.MemberID == Model.character.member.MemberID)
+                    if (member.MemberID == Model.character.member.MemberID)
                     {
                         current = "selected";
                     }
@@ -25,22 +25,33 @@
             <input type="text" class="form-control" value="@Model.character.CharacterName" id="CharacterName" name="CharacterName">
         </div>
         <div class="form-group">
-            <label>Role</label>
-            <input type="text" class="form-control" value="@Model.character.CharacterRole" id="CharacterRole" name="CharacterRole">
+            <label for="CharacterWeapon">Character Weapon</label>
+            <select class="form-control" id="CharacterWeapon" name="CharacterWeapon">
+                @for (int i = 0; i <= 5; i++)
+                {
+                    string select = "";
+                    int weaponLevels = i;
+                    if (Model.character.CharacterWeapon == weaponLevels)
+                    {
+                        select = "selected";
+                    }
+                    <option value="@weaponLevels" @select>@weaponLevels</option>
+                }
+            </select>
         </div>
         <div class="form-group">
-            <label>Type</label>
-            <input type="text" class="form-control" value="@Model.character.CharacterType" id="CharacterType" name="CharacterType">
-        </div>
-        <div class="form-group">
-            <label>Character Weapon</label>
-            <select class="form-control" value="@Model.character.CharacterWeapon" id="CharacterWeapon" name="CharacterWeapon">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+            <label>Character Treasure</label>
+            <select class="form-control" id="CharacterTreasure" name="CharacterTreasure">
+                @for(int i = 0; i <= 5; i++)
+                {
+                    string select = "";
+                    int treasureLevels = i;
+                    if(Model.character.CharacterTreasure == treasureLevels)
+                    {
+                        select = "selected";
+                    }
+                    <option value="@treasureLevels" @select>@treasureLevels</option>
+                }
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

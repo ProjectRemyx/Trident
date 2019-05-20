@@ -25,10 +25,11 @@
             </tr>
         </thead>
         <tbody>
+            @{ int rowNo = 0;}
             @foreach (var character in Model.Characters)
             {
             <tr>
-                <th scope="row"></th>
+                <th scope="row">@{rowNo++;} @rowNo</th>
                 <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
                 <td>@character.CharacterWeapon</td>
                 <td>@character.CharacterTreasure</td>

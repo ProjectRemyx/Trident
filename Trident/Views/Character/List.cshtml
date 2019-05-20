@@ -5,53 +5,31 @@
 
 <h2>Characters</h2>
 
-@*Old add character*@
-@*<div id="addNewMember">
-    @Html.ActionLink("Add character", "New")
-</div>*@
 <form method="get" action="/Character/New">
     <button type="submit" class="btn btn-primary">Add Character</button>
 </form>
-
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Character</th>
-                <th scope="col">Role</th>
-                <th scope="col">Type</th>
                 <th scope="col">Weapon Level</th>
+                <th scope="col">Weapon Treasure</th>
                 <th scope="col">Belongs To</th>
             </tr>
         </thead>
         <tbody>
+            @{ int rowNo = 0;}
             @foreach (var character in Model)
             {
-                <tr>
-                    <th scope="row"></th>
-                    <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
-                    <td>@character.CharacterRole</td>
-                    <td>@character.CharacterType</td>
-                    <td>@character.CharacterWeapon</td>
-                    <td>@character.member.MemberName</td>
-                    <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
-                </tr>
+            <tr>
+                <th scope="row">@{rowNo++;} @rowNo</th>
+                <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
+                <td>@character.CharacterWeapon</td>
+                <td>@character.CharacterTreasure</td>
+                <td>@character.member.MemberName</td>
+                <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
+            </tr>
             }
         </tbody>
     </table>
-
-@*<ul class="list-unstyled">
-    @foreach (var character in Model)
-    {
-        <div class="media">
-            <img class="mr-3" src="~/imgs/characters/(@character.CharacterName).png">
-            <div class="media-body">
-                <h5 class="mt-0">@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID)</h5>
-                Unique Weapon Level: @character.CharacterWeapon Role: @character.CharacterRole, Character Type: @character.CharacterType
-            </div>
-            <div>
-                <a href="@Url.Action("Delete/" + character.CharacterID)">Delete</a>
-            </div>
-        </div>
-    }
-</ul>*@
