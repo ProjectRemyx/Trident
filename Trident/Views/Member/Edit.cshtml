@@ -14,12 +14,29 @@
         <label for="MemberLevel">Level</label>
         <input type="text" class="form-control" value="@Model.member.MemberLevel" id="MemberLevel" name="MemberLevel">
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <label for="MemberSpecialty">Specialty</label>
         <select class="form-control" id="MemberSpecialty" name="MemberSpecialty">
             <option value="Magic">Magic</option>
             <option value="Physical">Physical</option>
             <option value="Both">Both</option>
+        </select>
+    </div>*@
+    <div class="form-group">
+        <label for="MemberSpecialty">Specialty</label>
+        <select class="form-control" id="MemberSpecialty" name="MemberSpecialty">
+            @{
+                string[] specialtyArray = { "Magic", "Physical", "Both"};
+                foreach (string specialty in specialtyArray)
+                {
+                    string selected = "";
+                    if (Model.member.MemberSpecialty == specialty)
+                    {
+                        selected = "selected";
+                    }
+                    <option value=@specialty @selected>@specialty</option>
+                }
+            }
         </select>
     </div>
     <div class="form-group">
@@ -27,13 +44,13 @@
         <select class="form-control" id="MemberStrikes" name="MemberStrikes">
             @for (int i = 0; i <= 3; i++)
             {
-            string select = "";
-            int strikesValue = i;
-            if (Model.member.MemberStrikes == strikesValue)
-            {
-                select = "selected";
-            }
-            <option value="@strikesValue" @select>@strikesValue</option>
+                string select = "";
+                int strikesValue = i;
+                if (Model.member.MemberStrikes == strikesValue)
+                {
+                    select = "selected";
+                }
+                <option value="@strikesValue" @select>@strikesValue</option>
             }
 
         </select>
