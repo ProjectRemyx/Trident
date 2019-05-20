@@ -1,51 +1,36 @@
 ﻿@model IEnumerable<Trident.Models.Team>
 
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "Teams";
 }
 
-<h2>List</h2>
+<h2>Teams</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TeamName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TeamRep)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TeamType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TeamMembers)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamRep)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TeamMembers)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeamID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeamID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeamID })
-        </td>
-    </tr>
-}
-
+<form method="get" action="/Team/New">
+    <button type="submit" class="btn btn-primary">Create Team</button>
+</form>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Team</th>
+            <th scope="col">Leader</th>
+            <th scope="col">Boss</th>
+            <th scope="col">Members</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int rowNo = 0;}
+        @foreach (var team in Model)
+        {
+            <tr>
+                <th scope="row">@{rowNo++;} @rowNo</th>
+                <td>@Html.ActionLink(team.TeamName, "Show/" + team.TeamID)</td>
+                <td>@team.TeamRep</td>
+                <td>@team.TeamType</td>
+                <td>@team.Members.Count()</td>
+                <td><a href="@Url.Action("Delete/" + team.TeamID)">Delete</a></td>
+            </tr>
+        }
+    </tbody>
 </table>
