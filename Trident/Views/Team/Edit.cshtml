@@ -1,64 +1,40 @@
-﻿@model Trident.Models.Team
+﻿@model Trident.Models.ViewModels.TeamEdit
 
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Team</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeamName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TeamName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeamRep, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TeamRep, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TeamRep, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeamType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TeamType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TeamType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeamMembers, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TeamMembers, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TeamMembers, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
+<h2>Edit Team</h2>
+<form method="post" action="/Team/Edit/@Model.team.TeamID">
+    <div class="form-group">
+        <label for="TeamName">Team Name</label>
+        <input type="text" class="form-control" placeholder="Enter Team Name" id="TeamName" name="TeamName">
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    <div class="form-group">
+        <label for="TeamRep">Team Leader</label>
+        <select class="form-control" id="TeamRep" name="TeamRep">
+            @foreach (var member in Model.members)
+            {
+                <option value="@member.MemberName">@member.MemberName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="TeamType">Team Type</label>
+        <select class="form-control" id="TeamType" name="TeamType">
+            @{ 
+                string[] typeArray = { "Tyrfas", "Lakreil", "Velkazar", "Flex" };
+                foreach (string type in typeArray)
+                {
+                    string selected = "";
+                    if(Model.team.TeamType == type)
+                    {
+                        selected = "selected";
+                    }
+                    <option value="@type" @selected>@type</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

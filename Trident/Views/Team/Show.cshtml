@@ -3,48 +3,37 @@
 @{
     ViewBag.Title = "Show";
 }
-
-<h2>Show</h2>
-
-<div>
-    <h4>Team</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamRep)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamRep)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TeamMembers)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TeamMembers)
-        </dd>
-
-    </dl>
+<h2>@Model.TeamName</h2>
+<h4>Team Lead: @Model.TeamRep</h4>
+<h4>Boss: @Model.TeamType</h4>
+<form method="get" action="/Team/Edit/@Model.TeamID">
+    <button type="submit" class="btn btn-primary">Edit Team</button>
+</form>
+<div id="characterList">
+    <h3>Members:</h3>
+    <form method="get" action="/Member/New">
+        <button type="submit" class="btn btn-primary">Add Member</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Member Name</th>
+                <th scope="col">Member Strikes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{ int rowNo = 0;}
+            @foreach (var member in Model.Members)
+            {
+                <tr>
+                    <th scope="row">@{rowNo++;} @rowNo</th>
+                    <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID, "Member")</td>
+                    <td>@member.MemberStrikes</td>
+                    <td><a href="@Url.Action("Edit/" + member.MemberID, "Member")">Remove</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TeamID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

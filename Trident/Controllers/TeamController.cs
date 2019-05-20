@@ -29,8 +29,9 @@ namespace Trident.Controllers
         public ActionResult New()
         {
             //Connect to db to get list of teams
-            TeamEdit teamEditView = new TeamEdit();
-            return View(teamEditView);
+            //TeamEdit teamEditView = new TeamEdit();
+            //return View(teamEditView);
+            return View(db.Members.ToList());
         }
 
         [HttpPost]
@@ -88,7 +89,6 @@ namespace Trident.Controllers
             myParams[1] = new SqlParameter("@rep", TeamRep);
             myParams[2] = new SqlParameter("@type", TeamType);
             myParams[3] = new SqlParameter("@id", id);
-            myParams[4] = new SqlParameter("@members", TeamMembers);
 
             db.Database.ExecuteSqlCommand(query, myParams);
             return RedirectToAction("Show/" + id);

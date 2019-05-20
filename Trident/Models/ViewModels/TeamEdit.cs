@@ -15,6 +15,8 @@ namespace Trident.Models.ViewModels
 
     //To edit a team you need to pick from a list of teams
     public virtual Team team { get; set; }
+    
+    public IEnumerable<Member> members { get; set; }
 
     }
 }
