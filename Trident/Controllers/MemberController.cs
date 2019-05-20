@@ -29,8 +29,9 @@ namespace Trident.Controllers
         public ActionResult New()
         {
             //Connect to db to get list of members
-            MemberEdit memberEditView = new MemberEdit();
-            return View(memberEditView);
+            //MemberEdit memberEditView = new MemberEdit();
+            //return View(memberEditView);
+            return View(db.Teams.ToList());
         }
 
         [HttpPost]

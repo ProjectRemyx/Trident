@@ -1,17 +1,17 @@
-﻿
-@{
-    ViewBag.Title = "New";
-}
+﻿@model IEnumerable<Trident.Models.Team>
+    @{
+        ViewBag.Title = "New";
+    }
 
 <h2>New Member</h2>
 @*Goes to Create ActionResult in MemberController when submitted*@
 <form method="post" action="/Member/Create">
     <div class="form-group">
-        <label for="CharacterMember_New">Belongs to:</label>
-        <select class="form-control" id="CharacterMember_New" name="CharacterMember_New">
-            @foreach (var member in Model)
+        <label for="MemberTeam_New">Team:</label>
+        <select class="form-control" id="MemberTeam_New" name="MemberTeam_New">
+            @foreach (var team in Model)
             {
-                <option value="@member.MemberID">@member.MemberName</option>
+                <option value="@team.TeamID">@team.TeamName</option>
             }
         </select>
     </div>
