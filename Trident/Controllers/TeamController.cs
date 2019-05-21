@@ -29,9 +29,9 @@ namespace Trident.Controllers
         public ActionResult New()
         {
             //Connect to db to get list of teams
-            //TeamEdit teamEditView = new TeamEdit();
-            //return View(teamEditView);
-            return View(db.Members.ToList());
+            TeamEdit teamEditView = new TeamEdit();
+            teamEditView.Members = db.Members.ToList();
+            return View(teamEditView);
         }
 
         [HttpPost]
@@ -72,19 +72,20 @@ namespace Trident.Controllers
         {
             //Need list of teams and the current team
             TeamEdit teamEditView = new TeamEdit();
-            teamEditView.team = db.Teams.Find(id);
+            teamEditView.Members = db.Members.ToList();
+            teamEditView.Team = db.Teams.Find(id);
             return View(teamEditView);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, string TeamName, string TeamRep, string TeamType, int TeamMembers)
+        public ActionResult Edit(int id, string TeamName, string TeamRep, string TeamType)
         {
             if ((id == null) || (db.Teams.Find(id) == null))
             {
                 return HttpNotFound();
             }
-            string query = "update teams set TeamName=@name, TeamRep=@rep, TeamType=@type, TeamMembers=@members where TeamID=@id";
-            SqlParameter[] myParams = new SqlParameter[5];
+            string query = "update teams set TeamName=@name, TeamRep=@rep, TeamType=@type where TeamID=@id";
+            SqlParameter[] myParams = new SqlParameter[4];
             myParams[0] = new SqlParameter("@name", TeamName);
             myParams[1] = new SqlParameter("@rep", TeamRep);
             myParams[2] = new SqlParameter("@type", TeamType);

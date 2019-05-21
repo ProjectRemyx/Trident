@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Trident.Models.Member>
-
+﻿@*@model IEnumerable<Trident.Models.Member>*@
+@model Trident.Models.ViewModels.TeamEdit
 @{
     ViewBag.Title = "New";
 }
@@ -14,7 +14,7 @@
         <label for="TeamRep_New">Team Leader</label>
         <select class="form-control" id="TeamRep_New" name="TeamRep_New">
             <option value="Undecided">Undecided</option>
-            @foreach (var member in Model)
+            @foreach (var member in Model.Members)
             {
                 <option value="@member.MemberName">@member.MemberName</option>
             }

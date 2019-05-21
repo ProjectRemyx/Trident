@@ -30,8 +30,8 @@ namespace Trident.Controllers
         {
             //Connect to db to get list of members
             MemberEdit memberEditView = new MemberEdit();
+            memberEditView.Teams = db.Teams.ToList();
             return View(memberEditView);
-            //return View(db.Teams.ToList());
         }
 
         [HttpPost]
@@ -74,7 +74,8 @@ namespace Trident.Controllers
         {
             //Need list of members and the current member
             MemberEdit memberEditView = new MemberEdit();
-            memberEditView.member = db.Members.Find(id);
+            memberEditView.Teams = db.Teams.ToList();
+            memberEditView.Member = db.Members.Find(id);
             return View(memberEditView);
         }
 
