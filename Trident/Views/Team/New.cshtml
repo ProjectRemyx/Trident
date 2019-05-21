@@ -13,6 +13,7 @@
     <div class="form-group">
         <label for="TeamRep_New">Team Leader</label>
         <select class="form-control" id="TeamRep_New" name="TeamRep_New">
+            <option value="Undecided">Undecided</option>
             @foreach (var member in Model)
             {
                 <option value="@member.MemberName">@member.MemberName</option>

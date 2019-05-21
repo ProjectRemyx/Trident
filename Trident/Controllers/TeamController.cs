@@ -56,7 +56,7 @@ namespace Trident.Controllers
         public ActionResult Show(int? id)
         {
             //If the id doesn't exist or the member doesn't exist
-            if ((id == null) || (db.Members.Find(id) == null))
+            if ((id == null) || (db.Teams.Find(id) == null))
             {
                 return HttpNotFound();
             }

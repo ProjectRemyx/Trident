@@ -16,7 +16,7 @@ namespace Trident.Models
         [Required, StringLength(30, ErrorMessage = "Name cannot be longer than 30 characters.")]
         public string TeamName { get; set; }
 
-        [Required, StringLength(30, ErrorMessage = "Role cannot be longer than 30 characters.")]
+        [StringLength(30, ErrorMessage = "Role cannot be longer than 30 characters.")]
         public string TeamRep { get; set; }
 
         [Required, StringLength(30, ErrorMessage = "Type cannot be longer than 30 characters.")]

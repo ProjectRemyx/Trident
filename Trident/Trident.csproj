@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201905200653599_TridentMVC1.Designer.cs">
       <DependentUpon>201905200653599_TridentMVC1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905202246471_Trident1.cs" />
+    <Compile Include="Migrations\201905202246471_Trident1.Designer.cs">
+      <DependentUpon>201905202246471_Trident1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Member.cs" />
@@ -280,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905200653599_TridentMVC1.resx">
       <DependentUpon>201905200653599_TridentMVC1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905202246471_Trident1.resx">
+      <DependentUpon>201905202246471_Trident1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
