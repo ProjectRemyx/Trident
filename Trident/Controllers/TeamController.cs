@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Trident.Models;
 using Trident.Models.ViewModels;
+using MySql.Data.MySqlClient;
 
 namespace Trident.Controllers
 {
@@ -41,10 +42,10 @@ namespace Trident.Controllers
             string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
 
             //Parameters for the query
-            SqlParameter[] myParams = new SqlParameter[3];
-            myParams[0] = new SqlParameter("@name", TeamName_New);
-            myParams[1] = new SqlParameter("@rep", TeamRep_New);
-            myParams[2] = new SqlParameter("@type", TeamType_New);
+            MySqlParameter[] myParams = new MySqlParameter[3];
+            myParams[0] = new MySqlParameter("@name", TeamName_New);
+            myParams[1] = new MySqlParameter("@rep", TeamRep_New);
+            myParams[2] = new MySqlParameter("@type", TeamType_New);
 
             //Execute Query
             db.Database.ExecuteSqlCommand(query, myParams);
@@ -61,8 +62,8 @@ namespace Trident.Controllers
                 return HttpNotFound();
             }
             string query = "select * from teams where teamid=@id";
-            SqlParameter[] myParams = new SqlParameter[1];
-            myParams[0] = new SqlParameter("@id", id);
+            MySqlParameter[] myParams = new MySqlParameter[1];
+            myParams[0] = new MySqlParameter("@id", id);
 
             Team myTeams = db.Teams.SqlQuery(query, myParams).FirstOrDefault();
             return View(myTeams);
@@ -85,11 +86,11 @@ namespace Trident.Controllers
                 return HttpNotFound();
             }
             string query = "update teams set TeamName=@name, TeamRep=@rep, TeamType=@type where TeamID=@id";
-            SqlParameter[] myParams = new SqlParameter[4];
-            myParams[0] = new SqlParameter("@name", TeamName);
-            myParams[1] = new SqlParameter("@rep", TeamRep);
-            myParams[2] = new SqlParameter("@type", TeamType);
-            myParams[3] = new SqlParameter("@id", id);
+            MySqlParameter[] myParams = new MySqlParameter[4];
+            myParams[0] = new MySqlParameter("@name", TeamName);
+            myParams[1] = new MySqlParameter("@rep", TeamRep);
+            myParams[2] = new MySqlParameter("@type", TeamType);
+            myParams[3] = new MySqlParameter("@id", id);
 
             db.Database.ExecuteSqlCommand(query, myParams);
             return RedirectToAction("Show/" + id);
@@ -102,7 +103,7 @@ namespace Trident.Controllers
                 return HttpNotFound();
             }
             string query;
-            SqlParameter param = new SqlParameter("@id", id);
+            MySqlParameter param = new MySqlParameter("@id", id);
 
             /* 
              Structure taken from MemberController where all of the members characters would be deleted.
@@ -115,7 +116,7 @@ namespace Trident.Controllers
 
             //Delete team
             query = "delete from teams where TeamID=@id";
-            param = new SqlParameter("@id", id);
+            param = new MySqlParameter("@id", id);
             db.Database.ExecuteSqlCommand(query, param);
             return RedirectToAction("List");
 

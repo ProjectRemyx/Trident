@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Trident.Models;
 using Trident.Models.ViewModels;
+using MySql.Data.MySqlClient;
 
 namespace Trident.Controllers
 {
@@ -41,12 +42,12 @@ namespace Trident.Controllers
             string query = "insert into members (MemberName, MemberLevel, MemberSpecialty, MemberStrikes, team_TeamID) values (@name, @level, @specialty, @strikes, @tid)";
 
             //Parameters for the query
-            SqlParameter[] myParams = new SqlParameter[5];
-            myParams[0] = new SqlParameter("@name", MemberName_New);
-            myParams[1] = new SqlParameter("@level", MemberLevel_New);
-            myParams[2] = new SqlParameter("@specialty", MemberSpecialty_New);
-            myParams[3] = new SqlParameter("@strikes", MemberStrikes_New);
-            myParams[4] = new SqlParameter("@tid", MemberTeam_New);
+            MySqlParameter[] myParams = new MySqlParameter[5];
+            myParams[0] = new MySqlParameter("@name", MemberName_New);
+            myParams[1] = new MySqlParameter("@level", MemberLevel_New);
+            myParams[2] = new MySqlParameter("@specialty", MemberSpecialty_New);
+            myParams[3] = new MySqlParameter("@strikes", MemberStrikes_New);
+            myParams[4] = new MySqlParameter("@tid", MemberTeam_New);
 
             //Execute Query
             db.Database.ExecuteSqlCommand(query, myParams);
@@ -63,8 +64,8 @@ namespace Trident.Controllers
                 return HttpNotFound();
             }
             string query = "select * from members where memberid=@id";
-            SqlParameter[] myParams = new SqlParameter[1];
-            myParams[0] = new SqlParameter("@id", id);
+            MySqlParameter[] myParams = new MySqlParameter[1];
+            myParams[0] = new MySqlParameter("@id", id);
 
             Member myMembers = db.Members.SqlQuery(query, myParams).FirstOrDefault();
             return View(myMembers);
@@ -87,13 +88,13 @@ namespace Trident.Controllers
                 return HttpNotFound();
             }
             string query = "update members set MemberName=@name, MemberLevel=@level, MemberSpecialty=@specialty, MemberStrikes=@strikes, team_TeamID=@tid where MemberID=@id";
-            SqlParameter[] myParams = new SqlParameter[6];
-            myParams[0] = new SqlParameter("@name", MemberName);
-            myParams[1] = new SqlParameter("@level", MemberLevel);
-            myParams[2] = new SqlParameter("@specialty", MemberSpecialty);
-            myParams[3] = new SqlParameter("@id", id);
-            myParams[4] = new SqlParameter("@strikes", MemberStrikes);
-            myParams[5] = new SqlParameter("@tid", MemberTeam);
+            MySqlParameter[] myParams = new MySqlParameter[6];
+            myParams[0] = new MySqlParameter("@name", MemberName);
+            myParams[1] = new MySqlParameter("@level", MemberLevel);
+            myParams[2] = new MySqlParameter("@specialty", MemberSpecialty);
+            myParams[3] = new MySqlParameter("@id", id);
+            myParams[4] = new MySqlParameter("@strikes", MemberStrikes);
+            myParams[5] = new MySqlParameter("@tid", MemberTeam);
 
             db.Database.ExecuteSqlCommand(query, myParams);
             return RedirectToAction("Show/" + id);
@@ -106,16 +107,16 @@ namespace Trident.Controllers
                 return HttpNotFound();
             }
             string query;
-            SqlParameter param = new SqlParameter("@id", id);
+            MySqlParameter param = new MySqlParameter("@id", id);
 
             //Delete associated characters
             query = "delete from characters where member_MemberID=@id";
-            param = new SqlParameter("@id", id);
+            param = new MySqlParameter("@id", id);
             db.Database.ExecuteSqlCommand(query, param);
             
             //Delete member
             query = "delete from members where MemberID=@id";
-            param = new SqlParameter("@id", id);
+            param = new MySqlParameter("@id", id);
             db.Database.ExecuteSqlCommand(query, param);
             return RedirectToAction("List");
 
