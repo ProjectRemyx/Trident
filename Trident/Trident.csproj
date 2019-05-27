@@ -234,6 +234,14 @@
     <Compile Include="Migrations\201905202246471_Trident1.Designer.cs">
       <DependentUpon>201905202246471_Trident1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905270035094_init1.cs" />
+    <Compile Include="Migrations\201905270035094_init1.Designer.cs">
+      <DependentUpon>201905270035094_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905270111174_Authentication.cs" />
+    <Compile Include="Migrations\201905270111174_Authentication.Designer.cs">
+      <DependentUpon>201905270111174_Authentication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Character.cs" />
@@ -377,6 +385,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905202246471_Trident1.resx">
       <DependentUpon>201905202246471_Trident1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905270035094_init1.resx">
+      <DependentUpon>201905270035094_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905270111174_Authentication.resx">
+      <DependentUpon>201905270111174_Authentication.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

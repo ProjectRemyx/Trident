@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MySql.Data.Entity;
 
 namespace Trident.Models
 {
@@ -18,10 +19,11 @@ namespace Trident.Models
         }
     }
 
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("Server=192.185.6.31; Database=lilxprince_trident; Uid=lilxp_jing; Pwd=h70bnrw8wvc", throwIfV1Schema: false)
+            : base("Server=192.185.6.31; Database=lilxprince_trident_test; Uid=lilxp_test; Pwd=h70bnrw8wvc", throwIfV1Schema: false)
         {
         }
 
