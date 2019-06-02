@@ -37,6 +37,10 @@ main {
 }
 
 /*Banner*/
+#tridentText {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 #indexBanner {
     background-image: url("../imgs/pandemonium.png");
     background-size:cover;
@@ -50,6 +54,28 @@ main {
 
 #phase1Banner {
     background-image: url("../imgs/wireframe.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-attachment: fixed;
+    height: 300px;
+    border-bottom: 10px solid #ffb348;
+    position: relative;
+}
+
+#phase2Banner {
+    background-image: url("../imgs/coding.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-attachment: fixed;
+    height: 300px;
+    border-bottom: 10px solid #ffb348;
+    position: relative;
+}
+
+#phase3Banner {
+    background-image: url("../imgs/testingBanner.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -81,6 +107,33 @@ main {
     top: 70%;
     transform: translate(0, -50%);
     padding-left: 100px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#phase2BannerText {
+    font-size: 3rem;
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    line-height: 1.1em;
+    color: white;
+    position: absolute;
+    top: 70%;
+    transform: translate(0, -50%);
+    padding-left: 100px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#phase3BannerText {
+    font-size: 3rem;
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    line-height: 1.1em;
+    color: white;
+    position: absolute;
+    top: 70%;
+    transform: translate(0, -50%);
+    padding-left: 100px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
     #bannerText .highlight {
@@ -173,6 +226,12 @@ main {
     #phase1BannerText{
         font-size: 2.5rem;
     }
+    #phase2BannerText {
+        font-size: 2.5rem;
+    }
+    #phase3BannerText {
+        font-size: 2.5rem;
+    }
 
     #indexBanner {
         height: 400px;
@@ -193,6 +252,12 @@ main {
         font-size: 2rem;
     }
     #phase1BannerText{
+        font-size: 2rem;
+    }
+    #phase2BannerText {
+        font-size: 2rem;
+    }
+    #phase2BannerText {
         font-size: 2rem;
     }
 
@@ -239,6 +304,12 @@ main {
     #phase1BannerText{
         padding-left: 70px;
     }
+    #phase2BannerText {
+        padding-left: 70px;
+    }
+    #phase3BannerText {
+        padding-left: 70px;
+    }
 
     .highlight {
         line-height: 1.1rem;
@@ -256,6 +327,12 @@ main {
     #phase1BannerText{
         padding-left: 40px;
     }
+    #phase2BannerText {
+        padding-left: 40px;
+    }
+    #phase3BannerText {
+        padding-left: 40px;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -263,6 +340,12 @@ main {
         font-size: 1.6rem;
     }
     #phase1BannerText{
+        font-size: 1.6rem;
+    }
+    #phase2BannerText {
+        font-size: 1.6rem;
+    }
+    #phase3BannerText {
         font-size: 1.6rem;
     }
 
