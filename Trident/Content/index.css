@@ -19,6 +19,13 @@ main {
     border: 1px solid lightgrey;
 }
 
+.largeSquarePic{
+    height: 425px;
+    width: 425px;
+    object-fit: contain;
+
+}
+
 .largePic {
     height: 425px;
     width: 425px;
@@ -41,7 +48,30 @@ main {
     position: relative;
 }
 
+#phase1Banner {
+    background-image: url("../imgs/wireframe.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-attachment: fixed;
+    height: 300px;
+    border-bottom: 10px solid #ffb348;
+    position: relative;
+}
+
 #bannerText {
+    font-size: 3rem;
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    line-height: 1.1em;
+    color: white;
+    position: absolute;
+    top: 70%;
+    transform: translate(0, -50%);
+    padding-left: 100px;
+}
+
+#phase1BannerText {
     font-size: 3rem;
     font-weight: bold;
     /*text-transform: uppercase;*/
@@ -140,6 +170,9 @@ main {
     #bannerText {
         font-size: 2.5rem;
     }
+    #phase1BannerText{
+        font-size: 2.5rem;
+    }
 
     #indexBanner {
         height: 400px;
@@ -157,6 +190,9 @@ main {
     }
 
     #bannerText {
+        font-size: 2rem;
+    }
+    #phase1BannerText{
         font-size: 2rem;
     }
 
@@ -200,6 +236,9 @@ main {
     #bannerText {
         padding-left: 70px;
     }
+    #phase1BannerText{
+        padding-left: 70px;
+    }
 
     .highlight {
         line-height: 1.1rem;
@@ -214,10 +253,16 @@ main {
     #bannerText {
         padding-left: 40px;
     }
+    #phase1BannerText{
+        padding-left: 40px;
+    }
 }
 
 @media screen and (max-width: 450px) {
     #bannerText {
+        font-size: 1.6rem;
+    }
+    #phase1BannerText{
         font-size: 1.6rem;
     }
 

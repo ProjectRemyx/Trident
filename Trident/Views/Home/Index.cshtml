@@ -28,7 +28,8 @@
                 <h2 class="title">Welcome to Trident!</h2>
                 <div id="welcomeText">
                     <p>
-                        Trident is a guild strategic management application built for personal use by Jing Cheng. It
+                        Trident is a strategic management application built for personal use by Jing Cheng. Also, it is the
+                        name of a guild in the game: King's Raid in which the application was built for. It
                         is made in ASP.NET (MVC5/EF6) using C# and MySQL. This application meets the need of running a
                         large guild and organizing boss runs within the guild. Features of this application include: Member list,
                         Member's character list and Team organization.
@@ -53,32 +54,68 @@
     <div id="featuresSection">
         <h2 class="hidden">Features</h2>
         <div id="features" class="flexContainer pageWrapper">
-            <div id="trackWorkouts" class="feature flexContainer">
-                <h3>Track workouts.</h3>
+            <div id="trackMembers" class="feature flexContainer">
+                <h3>Track Members</h3>
                 <div class="featureImgandText">
-                    <img src="<?= IMGPATH ?>1.jpg" alt="A person jogging on a treadmill">
+                    <img src="../imgs/member.png" alt="Character Portrait">
                     <div class="featureImgText">
-                        <p>Easily track your workouts and set routines. With Tollo you can become your own personal trainer.</p>
+                        <p>Track member details such as name, level and specialty.</p>
                     </div>
                 </div>
             </div>
-            <div id="setGoals" class="feature flexContainer">
-                <h3>Set goals.</h3>
+            <div id="setCharacters" class="feature flexContainer">
+                <h3>Character List</h3>
                 <div class="featureImgandText">
-                    <img src="<?= IMGPATH ?>8.jpg" alt="A person lifting weights">
+                    <img src="../imgs/characters.png" alt="Character List">
                     <div class="featureImgText">
-                        <p>Set daily goals, long-term goals and keep track of your progress.</p>
+                        <p>Set member's characters and keep track of member progress.</p>
                     </div>
                 </div>
             </div>
-            <div id="trackJournal" class="feature flexContainer">
-                <h3>Journal.</h3>
+            <div id="setTeams" class="feature flexContainer">
+                <h3>Set Teams</h3>
                 <div class="featureImgandText">
-                    <img src="<?= IMGPATH ?>goal.jpg" alt="A person running through a forest">
+                    <img src="../imgs/conquest.png" alt="Guild Bosses">
                     <div class="featureImgText">
-                        <p>Track your thoughts, feelings and results in Tollo. With our diary feature, you can log what you're feeling.</p>
+                        <p>Create teams for weekly guild raids. Stay organized and track team progress.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div id="phase1Banner" class="flexContainer">
+        <div id="phase1BannerText" class="pageWrapper">
+            Phase One
+            <br />
+            <span class="highlight">Wireframe Prototyping</span>
+        </div>
+    </div>
+    <div class="pageWrapper wrapper">
+        <div id="caseStudySection" class="flexContainer">
+            <div id="welcome">
+                <h2 class="title">Development Planning</h2>
+                <div id="welcomeText">
+                    <p>
+                        To start off the project, I structured the database schema and mapped out
+                        how the back-end of the application would work. Afterwards, I created wireframes 
+                        and mocked up my vision of the application.
+                        <br />
+                        <br />
+                        For this application, teams have a list of members in them whereas members have
+                        a list of characters associated with them. By combining these three relationships
+                        information is neatly organized.
+                        <br />
+                        <br />
+                        Fun fact, upon the creation of this application teams were not a feature. Originally,
+                        members and their characters were the main interest of the application but it has since
+                        been extended to encompass so.
+                    </p>
+                </div>
+                <br />
+            </div>
+            <div id="welcomeImg">
+                <img class="largeSquarePic" src="../imgs/singlememberview.png" alt="Wireframe">
             </div>
         </div>
     </div>
