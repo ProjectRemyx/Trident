@@ -3,38 +3,39 @@
 @{
     ViewBag.Title = "Edit";
 }
-
-<h2>Edit Team</h2>
-<form method="post" action="/Team/Edit/@Model.Team.TeamID">
-    <div class="form-group">
-        <label for="TeamName">Team Name</label>
-        <input type="text" class="form-control" value="@Model.Team.TeamName" id="TeamName" name="TeamName">
-    </div>
-    <div class="form-group">
-        <label for="TeamRep">Team Leader</label>
-        <select class="form-control" id="TeamRep" name="TeamRep">
-            @foreach (var member in Model.Members)
-            {
-                <option value="@member.MemberName">@member.MemberName</option>
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="TeamType">Team Type</label>
-        <select class="form-control" id="TeamType" name="TeamType">
-            @{ 
-                string[] typeArray = { "Tyrfas", "Lakreil", "Velkazar", "Flex" };
-                foreach (string type in typeArray)
+<div class="container body-content">
+    <h2>Edit Team</h2>
+    <form method="post" action="/Team/Edit/@Model.Team.TeamID">
+        <div class="form-group">
+            <label for="TeamName">Team Name</label>
+            <input type="text" class="form-control" value="@Model.Team.TeamName" id="TeamName" name="TeamName">
+        </div>
+        <div class="form-group">
+            <label for="TeamRep">Team Leader</label>
+            <select class="form-control" id="TeamRep" name="TeamRep">
+                @foreach (var member in Model.Members)
                 {
-                    string selected = "";
-                    if(Model.Team.TeamType == type)
-                    {
-                        selected = "selected";
-                    }
-                    <option value="@type" @selected>@type</option>
+                    <option value="@member.MemberName">@member.MemberName</option>
                 }
-            }
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="TeamType">Team Type</label>
+            <select class="form-control" id="TeamType" name="TeamType">
+                @{
+                    string[] typeArray = { "Tyrfas", "Lakreil", "Velkazar", "Flex" };
+                    foreach (string type in typeArray)
+                    {
+                        string selected = "";
+                        if (Model.Team.TeamType == type)
+                        {
+                            selected = "selected";
+                        }
+                        <option value="@type" @selected>@type</option>
+                    }
+                }
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

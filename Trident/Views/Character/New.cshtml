@@ -2,7 +2,7 @@
     @{
         ViewBag.Title = "New";
     }
-
+<div class="container body-content">
     <h2>Add Character</h2>
 
     <form method="post" action="/Character/Create">
@@ -11,7 +11,7 @@
             <select class="form-control" id="CharacterMember_New" name="CharacterMember_New">
                 @foreach (var member in Model)
                 {
-                <option value="@member.MemberID">@member.MemberName</option>
+                    <option value="@member.MemberID">@member.MemberName</option>
                 }
             </select>
         </div>
@@ -43,3 +43,4 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+</div>

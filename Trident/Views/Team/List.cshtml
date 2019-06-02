@@ -5,32 +5,33 @@
 }
 
 <h2>Teams</h2>
-
-<form method="get" action="/Team/New">
-    <button type="submit" class="btn btn-primary">Create Team</button>
-</form>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Team</th>
-            <th scope="col">Leader</th>
-            <th scope="col">Boss</th>
-            <th scope="col">Members</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{ int rowNo = 0;}
-        @foreach (var team in Model)
-        {
+<div class="container body-content">
+    <form method="get" action="/Team/New">
+        <button type="submit" class="btn btn-primary">Create Team</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
             <tr>
-                <th scope="row">@{rowNo++;} @rowNo</th>
-                <td>@Html.ActionLink(team.TeamName, "Show/" + team.TeamID)</td>
-                <td>@team.TeamRep</td>
-                <td>@team.TeamType</td>
-                <td>@team.Members.Count()</td>
-                <td><a href="@Url.Action("Delete/" + team.TeamID)">Delete</a></td>
+                <th scope="col">#</th>
+                <th scope="col">Team</th>
+                <th scope="col">Leader</th>
+                <th scope="col">Boss</th>
+                <th scope="col">Members</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @{ int rowNo = 0;}
+            @foreach (var team in Model)
+            {
+                <tr>
+                    <th scope="row">@{rowNo++;} @rowNo</th>
+                    <td>@Html.ActionLink(team.TeamName, "Show/" + team.TeamID)</td>
+                    <td>@team.TeamRep</td>
+                    <td>@team.TeamType</td>
+                    <td>@team.Members.Count()</td>
+                    <td><a href="@Url.Action("Delete/" + team.TeamID)">Delete</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

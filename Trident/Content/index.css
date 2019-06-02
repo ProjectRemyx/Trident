@@ -1,0 +1,232 @@
+﻿/* Default Overrides */
+main {
+    color: #434343;
+}
+
+/*General Classes*/
+.title {
+    font-size: 3rem;
+    color: #261724;
+}
+
+.title, .feature h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.divider {
+    width: 100%;
+    border: 1px solid lightgrey;
+}
+
+.largePic {
+    height: 425px;
+    width: 425px;
+}
+
+.largePic, .feature img {
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/*Banner*/
+#indexBanner {
+    background-image: url("../imgs/pandemonium.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-attachment: fixed;
+    height: 750px;
+    border-bottom: 10px solid #ffb348;
+    position: relative;
+}
+
+#bannerText {
+    font-size: 3rem;
+    font-weight: bold;
+    /*text-transform: uppercase;*/
+    line-height: 1.1em;
+    color: white;
+    position: absolute;
+    top: 70%;
+    transform: translate(0, -50%);
+    padding-left: 100px;
+}
+
+    #bannerText .highlight {
+        font-style: italic;
+        font-size: 1.25em;
+        line-height: 1.5em;
+    }
+
+/* Welcome Section */
+#welcome {
+    flex: 1;
+    margin-right: 75px;
+}
+
+#welcomeImg {
+    flex: 1;
+}
+
+#startTrident {
+    padding: 10px 100px;
+}
+
+/* Features Section  */
+#featuresSection {
+    padding: 50px;
+    color: #c8c8c8;
+    background-color: #2b3137;
+}
+
+#features {
+    align-items: flex-start;
+}
+
+.feature {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    font-weight: 500;
+    margin: 0 15px;
+}
+
+    .feature h3 {
+        width: 100%;
+        font-size: 1.8rem;
+    }
+
+    .feature img {
+        height: 200px;
+        margin: 15px 0;
+    }
+
+    .feature img, .featureImgText {
+        width: 200px;
+    }
+
+@media screen and (max-width: 1100px) {
+    #welcomeSection {
+        display: block;
+    }
+
+    #welcomeImg {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .featureImgandText .featureImgandText img {
+        height: 300px;
+        width: 300px;
+    }
+
+    .featureImgText {
+        width: 300px;
+        text-align: center;
+    }
+
+    .feature {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .pageWrapper {
+        padding: 80px;
+    }
+
+    #bannerText {
+        font-size: 2.5rem;
+    }
+
+    #indexBanner {
+        height: 400px;
+    }
+
+    #features {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    h2.title, h3 {
+        font-size: 2rem;
+    }
+
+    #bannerText {
+        font-size: 2rem;
+    }
+
+    #indexBanner {
+        height: 350px;
+    }
+
+    .feature {
+        margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    h2.title, h3 {
+        font-size: 1.75rem;
+    }
+
+    .pageWrapper {
+        padding: 50px;
+    }
+
+    #indexBanner {
+        height: 300px;
+    }
+
+    #featuresSection {
+        padding: 0px;
+    }
+
+    .feature {
+        margin-bottom: 50px;
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+    h2.title, h3 {
+        font-size: 1.5rem;
+    }
+
+    #bannerText {
+        padding-left: 70px;
+    }
+
+    .highlight {
+        line-height: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #startTrident {
+        padding: 5px 70px;
+    }
+
+    #bannerText {
+        padding-left: 40px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #bannerText {
+        font-size: 1.6rem;
+    }
+
+    .featureImgandText img {
+        height: 150px;
+        width: 150px;
+    }
+
+    .featureImgText {
+        width: 150px;
+    }
+}

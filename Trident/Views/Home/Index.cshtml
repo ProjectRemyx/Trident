@@ -3,10 +3,83 @@
 }
 
 @*Cool Heading Animation CodePen from
-https://codepen.io/jdfd/pen/eVodJz*@
-<div class="main">
-    <h1 class="main-heading">
-        <span class="main-heading-primary">Trident</span>
-        <span class="main-heading-secondary">Guild Tool</span>
-    </h1>
+    https://codepen.io/jdfd/pen/eVodJz*@
+@*<div class="main">
+        <h1 class="main-heading">
+            <span class="main-heading-primary">Trident</span>
+            <span class="main-heading-secondary">Guild Tool</span>
+        </h1>
+    </div>*@
+
+<!-- Main Graphic -->
+<div id="indexBanner" class="flexContainer">
+    <div id="bannerText" class="pageWrapper">
+        Strong alone, <br />
+        unstoppable together, <br />
+        we are... <br />
+        <span class="highlight">Trident</span>
+    </div>
 </div>
+<!-- Welcome To Trident Section -->
+<main id="mainContent">
+    <div class="pageWrapper wrapper">
+        <div id="welcomeSection" class="flexContainer">
+            <div id="welcome">
+                <h2 class="title">Welcome to Trident!</h2>
+                <div id="welcomeText">
+                    <p>
+                        Trident is a guild strategic management application built for personal use by Jing Cheng. It
+                        is made in ASP.NET (MVC5/EF6) using C# and MySQL. This application meets the need of running a
+                        large guild and organizing boss runs within the guild. Features of this application include: Member list,
+                        Member's character list and Team organization.
+                        <br />
+                        <br />
+                        This application will help minimize the weaknesses of individual members as
+                        well as maximize their strengths.
+                        <br />
+                        <br />
+                        Follow us on our journey.
+                    </p>
+                </div>
+                <br />
+            </div>
+            <div id="welcomeImg">
+                <img class="largePic" src="../imgs/trident_logo.jpg" alt="Trident Logo">
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <!--Features Section-->
+    <div id="featuresSection">
+        <h2 class="hidden">Features</h2>
+        <div id="features" class="flexContainer pageWrapper">
+            <div id="trackWorkouts" class="feature flexContainer">
+                <h3>Track workouts.</h3>
+                <div class="featureImgandText">
+                    <img src="<?= IMGPATH ?>1.jpg" alt="A person jogging on a treadmill">
+                    <div class="featureImgText">
+                        <p>Easily track your workouts and set routines. With Tollo you can become your own personal trainer.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="setGoals" class="feature flexContainer">
+                <h3>Set goals.</h3>
+                <div class="featureImgandText">
+                    <img src="<?= IMGPATH ?>8.jpg" alt="A person lifting weights">
+                    <div class="featureImgText">
+                        <p>Set daily goals, long-term goals and keep track of your progress.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="trackJournal" class="feature flexContainer">
+                <h3>Journal.</h3>
+                <div class="featureImgandText">
+                    <img src="<?= IMGPATH ?>goal.jpg" alt="A person running through a forest">
+                    <div class="featureImgText">
+                        <p>Track your thoughts, feelings and results in Tollo. With our diary feature, you can log what you're feeling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

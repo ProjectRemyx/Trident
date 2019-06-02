@@ -2,26 +2,27 @@
 @{
     ViewBag.Title = "Show";
 }
+<div class="container body-content">
+    <h2>@Model.CharacterName</h2>
 
-<h2>@Model.CharacterName</h2>
+    <form method="get" action="/Character/Edit/@Model.CharacterID">
+        <button type="submit" class="btn btn-primary">Edit Character</button>
+    </form>
 
-<form method="get" action="/Character/Edit/@Model.CharacterID">
-    <button type="submit" class="btn btn-primary">Edit Character</button>
-</form>
-
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">Weapon Level</th>
-            <th scope="col">Treasure Level</th>
-            <th scope="col">Belongs To</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>@Model.CharacterWeapon</td>
-            <td>@Model.CharacterTreasure</td>
-            <td>@Model.member.MemberName</td>
-        </tr>
-    </tbody>
-</table>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Weapon Level</th>
+                <th scope="col">Treasure Level</th>
+                <th scope="col">Belongs To</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.CharacterWeapon</td>
+                <td>@Model.CharacterTreasure</td>
+                <td>@Model.member.MemberName</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

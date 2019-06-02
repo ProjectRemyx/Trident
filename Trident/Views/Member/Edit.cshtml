@@ -2,62 +2,64 @@
 @{
     ViewBag.Title = "Edit";
 }
+<div class="container body-content">
 
-<h2>Edit</h2>
+    <h2>Edit</h2>
 
-<form method="post" action="/Member/Edit/@Model.Member.MemberID">
-    <div class="form-group">
-        <label>Team:</label>
-        <select class="form-control" id="MemberTeam" name="MemberTeam">
-           @foreach (var team in Model.Teams)
-           {
-               string current = "";
-               if (team.TeamID == Model.Member.team.TeamID)
-               {
-                   current = "selected";
-               }
-               <option value="@team.TeamID" @current>@team.TeamName</option>
-           }
-        </select>
-        <label for="MemberName">Username</label>
-        <input type="text" class="form-control" value="@Model.Member.MemberName" id="MemberName" name="MemberName">
-    </div>
-    <div class="form-group">
-        <label for="MemberLevel">Level</label>
-        <input type="text" class="form-control" value="@Model.Member.MemberLevel" id="MemberLevel" name="MemberLevel">
-    </div>
-    <div class="form-group">
-        <label for="MemberSpecialty">Specialty</label>
-        <select class="form-control" id="MemberSpecialty" name="MemberSpecialty">
-            @{
-                string[] specialtyArray = { "Magic", "Physical", "Both"};
-                foreach (string specialty in specialtyArray)
+    <form method="post" action="/Member/Edit/@Model.Member.MemberID">
+        <div class="form-group">
+            <label>Team:</label>
+            <select class="form-control" id="MemberTeam" name="MemberTeam">
+                @foreach (var team in Model.Teams)
                 {
-                    string selected = "";
-                    if (Model.Member.MemberSpecialty == specialty)
+                    string current = "";
+                    if (team.TeamID == Model.Member.team.TeamID)
                     {
-                        selected = "selected";
+                        current = "selected";
                     }
-                    <option value=@specialty @selected>@specialty</option>
+                    <option value="@team.TeamID" @current>@team.TeamName</option>
                 }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="MemberStrikes">Strikes</label>
-        <select class="form-control" id="MemberStrikes" name="MemberStrikes">
-            @for (int i = 0; i <= 3; i++)
-            {
-                string select = "";
-                int strikesValue = i;
-                if (Model.Member.MemberStrikes == strikesValue)
+            </select>
+            <label for="MemberName">Username</label>
+            <input type="text" class="form-control" value="@Model.Member.MemberName" id="MemberName" name="MemberName">
+        </div>
+        <div class="form-group">
+            <label for="MemberLevel">Level</label>
+            <input type="text" class="form-control" value="@Model.Member.MemberLevel" id="MemberLevel" name="MemberLevel">
+        </div>
+        <div class="form-group">
+            <label for="MemberSpecialty">Specialty</label>
+            <select class="form-control" id="MemberSpecialty" name="MemberSpecialty">
+                @{
+                    string[] specialtyArray = { "Magic", "Physical", "Both" };
+                    foreach (string specialty in specialtyArray)
+                    {
+                        string selected = "";
+                        if (Model.Member.MemberSpecialty == specialty)
+                        {
+                            selected = "selected";
+                        }
+                        <option value=@specialty @selected>@specialty</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="MemberStrikes">Strikes</label>
+            <select class="form-control" id="MemberStrikes" name="MemberStrikes">
+                @for (int i = 0; i <= 3; i++)
                 {
-                    select = "selected";
+                    string select = "";
+                    int strikesValue = i;
+                    if (Model.Member.MemberStrikes == strikesValue)
+                    {
+                        select = "selected";
+                    }
+                    <option value="@strikesValue" @select>@strikesValue</option>
                 }
-                <option value="@strikesValue" @select>@strikesValue</option>
-            }
 
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

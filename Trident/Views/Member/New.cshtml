@@ -3,44 +3,45 @@
     @{
         ViewBag.Title = "New";
     }
-
-<h2>New Member</h2>
-@*Goes to Create ActionResult in MemberController when submitted*@
-<form method="post" action="/Member/Create">
-    <div class="form-group">
-        <label for="MemberTeam_New">Team:</label>
-        <select class="form-control" id="MemberTeam_New" name="MemberTeam_New">
-            @foreach (var team in Model.Teams)
-            {
-                <option value="@team.TeamID">@team.TeamName</option>
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="MemberName_New">Username</label>
-        <input type="text" class="form-control" placeholder="Enter username" id="MemberName_New" name="MemberName_New">
-    </div>
-    <div class="form-group">
-        <label for="MemberLevel_New">Level</label>
-        <input type="text" class="form-control" placeholder="Level" id="MemberLevel_New" name="MemberLevel_New">
-    </div>
-    <div class="form-group">
-        <label for="MemberSpecialty_New">Specialty</label>
-        <select class="form-control" id="MemberSpecialty_New" name="MemberSpecialty_New">
-            <option value="Magic">Magic</option>
-            <option value="Physical">Physical</option>
-            <option value="Both">Both</option>
-        </select>
-        @*<input type="text" class="form-control" placeholder="Specialty" id="MemberSpecialty_New" name="MemberSpecialty_New">*@
-    </div>
-    <div class="form-group">
-        <label for="MemberStrikes_New">Strikes</label>
-        <select class="form-control" id="MemberStrikes_New" name="MemberStrikes_New">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<div class="container body-content">
+    <h2>New Member</h2>
+    @*Goes to Create ActionResult in MemberController when submitted*@
+    <form method="post" action="/Member/Create">
+        <div class="form-group">
+            <label for="MemberTeam_New">Team:</label>
+            <select class="form-control" id="MemberTeam_New" name="MemberTeam_New">
+                @foreach (var team in Model.Teams)
+                {
+                    <option value="@team.TeamID">@team.TeamName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="MemberName_New">Username</label>
+            <input type="text" class="form-control" placeholder="Enter username" id="MemberName_New" name="MemberName_New">
+        </div>
+        <div class="form-group">
+            <label for="MemberLevel_New">Level</label>
+            <input type="text" class="form-control" placeholder="Level" id="MemberLevel_New" name="MemberLevel_New">
+        </div>
+        <div class="form-group">
+            <label for="MemberSpecialty_New">Specialty</label>
+            <select class="form-control" id="MemberSpecialty_New" name="MemberSpecialty_New">
+                <option value="Magic">Magic</option>
+                <option value="Physical">Physical</option>
+                <option value="Both">Both</option>
+            </select>
+            @*<input type="text" class="form-control" placeholder="Specialty" id="MemberSpecialty_New" name="MemberSpecialty_New">*@
+        </div>
+        <div class="form-group">
+            <label for="MemberStrikes_New">Strikes</label>
+            <select class="form-control" id="MemberStrikes_New" name="MemberStrikes_New">
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

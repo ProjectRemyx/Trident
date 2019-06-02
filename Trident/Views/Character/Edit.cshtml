@@ -2,7 +2,7 @@
     @{
         ViewBag.Title = "Edit";
     }
-
+<div class="container body-content">
     <h2>Edit Character</h2>
 
     <form method="post" action="/Character/Edit/@Model.character.CharacterID">
@@ -42,11 +42,11 @@
         <div class="form-group">
             <label>Character Treasure</label>
             <select class="form-control" id="CharacterTreasure" name="CharacterTreasure">
-                @for(int i = 0; i <= 5; i++)
+                @for (int i = 0; i <= 5; i++)
                 {
                     string select = "";
                     int treasureLevels = i;
-                    if(Model.character.CharacterTreasure == treasureLevels)
+                    if (Model.character.CharacterTreasure == treasureLevels)
                     {
                         select = "selected";
                     }
@@ -56,4 +56,4 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
+</div>

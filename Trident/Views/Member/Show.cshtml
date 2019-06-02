@@ -2,41 +2,41 @@
 @{
     ViewBag.Title = "Show";
 }
-
-<h2>@Model.MemberName</h2>
-<h4>Level: @Model.MemberLevel</h4>
-<h4>Specialty: @Model.MemberSpecialty</h4>
-<h4>Strikes: @Model.MemberStrikes</h4>
-<form method="get" action="/Member/Edit/@Model.MemberID">
-    <button type="submit" class="btn btn-primary">Edit Member</button>
-</form>
-<div id="characterList">
-    <h3>Characters:</h3>
-    <form method="get" action="/Character/New">
-        <button type="submit" class="btn btn-primary">Add Character</button>
+<div class="container body-content">
+    <h2>@Model.MemberName</h2>
+    <h4>Level: @Model.MemberLevel</h4>
+    <h4>Specialty: @Model.MemberSpecialty</h4>
+    <h4>Strikes: @Model.MemberStrikes</h4>
+    <form method="get" action="/Member/Edit/@Model.MemberID">
+        <button type="submit" class="btn btn-primary">Edit Member</button>
     </form>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Character</th>
-                <th scope="col">Weapon Level</th>
-                <th scope="col">Treasure Level</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ int rowNo = 0;}
-            @foreach (var character in Model.Characters)
-            {
-            <tr>
-                <th scope="row">@{rowNo++;} @rowNo</th>
-                <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
-                <td>@character.CharacterWeapon</td>
-                <td>@character.CharacterTreasure</td>
-                <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    <div id="characterList">
+        <h3>Characters:</h3>
+        <form method="get" action="/Character/New">
+            <button type="submit" class="btn btn-primary">Add Character</button>
+        </form>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Character</th>
+                    <th scope="col">Weapon Level</th>
+                    <th scope="col">Treasure Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int rowNo = 0;}
+                @foreach (var character in Model.Characters)
+                {
+                    <tr>
+                        <th scope="row">@{rowNo++;} @rowNo</th>
+                        <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
+                        <td>@character.CharacterWeapon</td>
+                        <td>@character.CharacterTreasure</td>
+                        <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
-
