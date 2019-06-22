@@ -2,6 +2,7 @@
 A guild application to hold users, assign them to a teams as well as track their units.
 
 Changelog Trident .NET Application
+
 June 01, 2019
 - Adding front-end changes to index page (Case Study)
 
