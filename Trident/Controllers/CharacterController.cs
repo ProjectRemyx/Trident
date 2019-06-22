@@ -15,16 +15,21 @@ namespace Trident.Controllers
     {
         //Db variable
         private MemberContext db = new MemberContext();
+        
+        [Authorize(Roles = "Member")]
         // GET: Character
         public ActionResult Index()
         {
             return RedirectToAction("List");
         }
+
+        [Authorize(Roles = "Admin")]
         public ActionResult New()
         {
             return View(db.Members.ToList());
         }
-        
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Create(string CharacterName_New, int CharacterWeapon_New, int CharacterTreasure_New, int? CharacterMember_New)
         {
@@ -38,20 +43,23 @@ namespace Trident.Controllers
             myParams[3] = new MySqlParameter("@mid", CharacterMember_New);
 
             db.Database.ExecuteSqlCommand(query, myParams);
-            return RedirectToAction("List");
+            return RedirectToAction("Show/" + CharacterMember_New, "Member");
         }
 
+        [Authorize(Roles = "Member, Admin")]
         public ActionResult Show(int id)
         {
             string query = "select * from characters where characterid = @id";
             return View(db.Characters.SqlQuery(query, new MySqlParameter("@id", id)).FirstOrDefault());
         }
 
+        [Authorize(Roles = "Member, Admin")]
         public ActionResult List()
         {
             return View(db.Characters.ToList());
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             CharacterEdit characterEdit = new CharacterEdit();
@@ -68,6 +76,7 @@ namespace Trident.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Edit(int? id, string CharacterName, int CharacterWeapon, int CharacterTreasure, int? CharacterMember)
         {
@@ -108,6 +117,7 @@ namespace Trident.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             string query = "delete from characters where characterid = @id";

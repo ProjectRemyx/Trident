@@ -27,6 +27,7 @@ namespace Trident.Controllers
             return View(members);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult New()
         {
             //Connect to db to get list of members
@@ -35,6 +36,7 @@ namespace Trident.Controllers
             return View(memberEditView);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberSpecialty_New, int MemberStrikes_New, int? MemberTeam_New)
         {
@@ -56,6 +58,7 @@ namespace Trident.Controllers
             return RedirectToAction("List");
         }
 
+        [Authorize(Roles = "Member, Admin")]
         public ActionResult Show(int? id)
         {
             //If the id doesn't exist or the member doesn't exist
@@ -71,6 +74,7 @@ namespace Trident.Controllers
             return View(myMembers);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             //Need list of members and the current member
@@ -80,6 +84,7 @@ namespace Trident.Controllers
             return View(memberEditView);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Edit(int id, string MemberName, int MemberLevel, string MemberSpecialty, int MemberStrikes, int? MemberTeam)
         {
@@ -100,6 +105,7 @@ namespace Trident.Controllers
             return RedirectToAction("Show/" + id);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if ((id == null) || (db.Members.Find(id) == null))
