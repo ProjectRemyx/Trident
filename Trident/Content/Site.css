@@ -3,9 +3,17 @@
     padding-bottom: 20px;
 }
 
+.mt{
+    margin-top: 5em !important;
+}
+
 .flex-container{
     display: flex;
     flex-flow: row wrap;
+}
+
+.padding{
+    padding: 100px;
 }
 
 /*Banners*/

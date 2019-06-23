@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Verify";
 }
-<div class="container body-content">
+<div class="container body-content padding">
     <h2>@ViewBag.Title.</h2>
 
     @using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
