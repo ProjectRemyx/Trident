@@ -2,6 +2,20 @@
 @{
     ViewBag.Title = "Show";
 }
+
+@if (TempData["EditSuccess"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <strong>Member edited!</strong>
+    </div>
+}
+else if (TempData["EditFail"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Failed to edit member</strong>
+    </div>
+}
+
 <div class="container body-content">
     <h2>@Model.MemberName</h2>
     <h4>Level: @Model.MemberLevel</h4>
@@ -31,13 +45,13 @@
                 @{ int rowNo = 0;}
                 @foreach (var character in Model.Characters)
                 {
-                <tr>
-                    <th scope="row">@{rowNo++;} @rowNo</th>
-                    <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
-                    <td>@character.CharacterWeapon</td>
-                    <td>@character.CharacterTreasure</td>
-                    <td>@Html.ActionLink("Delete", "Delete", "Character", new { id = character.CharacterID, mid = Model.MemberID }, new { onclick = "return confirm('Are you sure you want to delete this character?');" })</td>
-                </tr>
+                    <tr>
+                        <th scope="row">@{rowNo++;} @rowNo</th>
+                        <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
+                        <td>@character.CharacterWeapon</td>
+                        <td>@character.CharacterTreasure</td>
+                        <td>@Html.ActionLink("Delete", "Delete", "Character", new { id = character.CharacterID, mid = Model.MemberID }, new { onclick = "return confirm('Are you sure you want to delete this character?');" })</td>
+                    </tr>
                 }
             </tbody>
         </table>

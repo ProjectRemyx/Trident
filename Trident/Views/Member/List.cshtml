@@ -6,8 +6,33 @@
     ViewBag.Title = "Members";
 }
 
-<h2>Members</h2>
+@if (TempData["AddSuccess"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <strong>Member added!</strong>
+    </div>
+}
+else if (TempData["AddFail"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Failed to add member</strong>
+    </div>
+}
+else if (TempData["DeleteSuccess"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <strong>Member deleted!</strong>
+    </div>
+}
+else if (TempData["DeleteFail"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Failed to delete member</strong>
+    </div>
+}
+
 <div class="container body-content">
+    <h2>Members</h2>
     <form method="get" action="/Member/New">
         <button type="submit" class="btn btn-primary">Add Member</button>
     </form>
@@ -27,16 +52,16 @@
             @{ int rowNo = 0;}
             @foreach (var member in Model)
             {
-            <tr>
-                <th scope="row">@{rowNo++;} @rowNo</th>
-                <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
-                <td>@member.MemberLevel</td>
-                <td>@member.MemberSpecialty</td>
-                <td>@member.MemberStrikes</td>
-                <td>@member.Characters.Count()</td>
-                <td>@member.team.TeamName</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { id = member.MemberID }, new { onclick = "return confirm('Are you sure you want to delete this member?');" })</td>
-            </tr>
+                <tr>
+                    <th scope="row">@{rowNo++;} @rowNo</th>
+                    <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
+                    <td>@member.MemberLevel</td>
+                    <td>@member.MemberSpecialty</td>
+                    <td>@member.MemberStrikes</td>
+                    <td>@member.Characters.Count()</td>
+                    <td>@member.team.TeamName</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = member.MemberID }, new { onclick = "return confirm('Are you sure you want to delete this member?');" })</td>
+                </tr>
             }
         </tbody>
     </table>
