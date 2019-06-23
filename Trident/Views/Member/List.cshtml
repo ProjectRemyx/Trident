@@ -1,11 +1,19 @@
 ﻿@model IEnumerable<Trident.Models.Member>
 
 @{
-    /**/
-
     ViewBag.Title = "Members";
 }
 
+@section scripts
+{
+    <link href="~/Content/members.css" rel="stylesheet" asp-file-version="true"/>    
+}
+
+<div class="banner flex-container generalBanner">
+    <h2 class="banner-title wrapper">Members</h2>
+</div>
+
+@*Alert Messages*@
 @if (TempData["AddSuccess"] != null)
 {
     <div class="alert alert-success text-center" role="alert">
@@ -30,9 +38,9 @@ else if (TempData["DeleteFail"] != null)
         <strong>Failed to delete member</strong>
     </div>
 }
+@*Alert Messages End*@
 
 <div class="container body-content">
-    <h2>Members</h2>
     <form method="get" action="/Member/New">
         <button type="submit" class="btn btn-primary">Add Member</button>
     </form>

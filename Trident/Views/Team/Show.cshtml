@@ -3,6 +3,16 @@
 @{
     ViewBag.Title = "Show";
 }
+
+@section scripts
+{
+    <link href="~/Content/members.css" rel="stylesheet" asp-file-version="true" />
+}
+
+<div class="banner flex-container ShowBanner">
+    <h2 class="banner-title wrapper">Team</h2>
+</div>
+
 @if (TempData["EditSuccess"] != null)
 {
     <div class="alert alert-success text-center" role="alert">
@@ -15,7 +25,6 @@ else if (TempData["EditFail"] != null)
         <strong>Failed edit team</strong>
     </div>
 }
-
 
 <div class="container body-content">
     <h2>@Model.TeamName</h2>

@@ -1,0 +1,24 @@
+﻿/* Stylesheet for member related pages */
+body {
+    padding-top: 50px;
+}
+
+.generalBanner{
+    background-image: url("../imgs/banners/castle.jpg");
+}
+
+.EditBanner{
+    background-image: url("../imgs/banners/Aurora.png");
+}
+
+.ShowBanner {
+    background-image: url("../imgs/banners/MoonStars.jpg");
+}
+
+.AddBanner {
+    background-image: url("../imgs/banners/DarkerMysticalForest.jpg");
+}
+
+.wrapper{
+    padding: 0;
+}

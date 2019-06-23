@@ -3,10 +3,17 @@
 @{
     ViewBag.Title = "New";
 }
-@Html.AntiForgeryToken()
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+@section scripts
+{
+    <link href="~/Content/members.css" rel="stylesheet" asp-file-version="true" />
+}
+
+<div class="banner flex-container AddBanner">
+    <h2 class="banner-title wrapper">Add Member</h2>
+</div>
+
 <div class="container body-content">
-    <h2>New Member</h2>
     <span id="validation"></span>
     @*Goes to Create ActionResult in MemberController when submitted*@
     <form method="post" action="/Member/Create" name="memberForm">

@@ -2,10 +2,17 @@
 @{
     ViewBag.Title = "Edit";
 }
+
+@section scripts
+{
+    <link href="~/Content/members.css" rel="stylesheet" asp-file-version="true" />
+}
+
+<div class="banner flex-container EditBanner">
+    <h2 class="banner-title wrapper">Edit Member</h2>
+</div>
+
 <div class="container body-content">
-
-    <h2>Edit Member:</h2>
-
     <form method="post" action="/Member/Edit/@Model.Member.MemberID">
         <div class="form-group">
             <label>Team:</label>
