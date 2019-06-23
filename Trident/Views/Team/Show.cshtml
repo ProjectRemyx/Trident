@@ -3,6 +3,20 @@
 @{
     ViewBag.Title = "Show";
 }
+@if (TempData["EditSuccess"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <strong>Team edited!</strong>
+    </div>
+}
+else if (TempData["EditFail"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Failed edit team</strong>
+    </div>
+}
+
+
 <div class="container body-content">
     <h2>@Model.TeamName</h2>
     <h4>Team Lead: @Model.TeamRep</h4>
@@ -37,4 +51,7 @@
             </tbody>
         </table>
     </div>
+</div>
+<div class="container back-to-list">
+    @Html.ActionLink("Back to team list", "List", "Team")
 </div>

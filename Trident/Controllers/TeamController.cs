@@ -40,20 +40,30 @@ namespace Trident.Controllers
         [HttpPost]
         public ActionResult Create(string TeamName_New, string TeamRep_New, string TeamType_New)
         {
-            //Query string
-            string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
+            if(ModelState.IsValid)
+            {
+                //Query string
+                string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
 
-            //Parameters for the query
-            MySqlParameter[] myParams = new MySqlParameter[3];
-            myParams[0] = new MySqlParameter("@name", TeamName_New);
-            myParams[1] = new MySqlParameter("@rep", TeamRep_New);
-            myParams[2] = new MySqlParameter("@type", TeamType_New);
+                //Parameters for the query
+                MySqlParameter[] myParams = new MySqlParameter[3];
+                myParams[0] = new MySqlParameter("@name", TeamName_New);
+                myParams[1] = new MySqlParameter("@rep", TeamRep_New);
+                myParams[2] = new MySqlParameter("@type", TeamType_New);
 
-            //Execute Query
-            db.Database.ExecuteSqlCommand(query, myParams);
+                //Execute Query
+                db.Database.ExecuteSqlCommand(query, myParams);
 
-            //Re-direct to list of members
-            return RedirectToAction("List");
+                TempData["AddSuccess"] = "Team successfully added";
+                //Re-direct to list of members
+                return RedirectToAction("List");
+            }
+            else
+            {
+                TempData["AddFail"] = "Failed to add team";
+                //Re-direct to list of members
+                return RedirectToAction("List");
+            }
         }
 
         [Authorize(Roles = "Member, Admin")]
@@ -86,45 +96,65 @@ namespace Trident.Controllers
         [HttpPost]
         public ActionResult Edit(int id, string TeamName, string TeamRep, string TeamType)
         {
-            if ((id == null) || (db.Teams.Find(id) == null))
+            if(ModelState.IsValid)
             {
-                return HttpNotFound();
-            }
-            string query = "update teams set TeamName=@name, TeamRep=@rep, TeamType=@type where TeamID=@id";
-            MySqlParameter[] myParams = new MySqlParameter[4];
-            myParams[0] = new MySqlParameter("@name", TeamName);
-            myParams[1] = new MySqlParameter("@rep", TeamRep);
-            myParams[2] = new MySqlParameter("@type", TeamType);
-            myParams[3] = new MySqlParameter("@id", id);
+                if ((id == null) || (db.Teams.Find(id) == null))
+                {
+                    return HttpNotFound();
+                }
+                string query = "update teams set TeamName=@name, TeamRep=@rep, TeamType=@type where TeamID=@id";
+                MySqlParameter[] myParams = new MySqlParameter[4];
+                myParams[0] = new MySqlParameter("@name", TeamName);
+                myParams[1] = new MySqlParameter("@rep", TeamRep);
+                myParams[2] = new MySqlParameter("@type", TeamType);
+                myParams[3] = new MySqlParameter("@id", id);
 
-            db.Database.ExecuteSqlCommand(query, myParams);
-            return RedirectToAction("Show/" + id);
+                db.Database.ExecuteSqlCommand(query, myParams);
+                TempData["EditSuccess"] = "Team successfully edited";
+                return RedirectToAction("Show/" + id);
+
+            }
+            else
+            {
+                TempData["EditFail"] = "Failed to edit team";
+                return RedirectToAction("Show/" + id);
+            }
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
-            if ((id == null) || (db.Teams.Find(id) == null))
+            if(ModelState.IsValid)
             {
-                return HttpNotFound();
+                if ((id == null) || (db.Teams.Find(id) == null))
+                {
+                    return HttpNotFound();
+                }
+                string query;
+                MySqlParameter param = new MySqlParameter("@id", id);
+
+                /* 
+                 Structure taken from MemberController where all of the members characters would be deleted.
+                 Not sure if this is needed for teams as I wish to keep members and asign them to new teams.
+                 */
+                ////Delete associated characters
+                //query = "delete from characters where member_MemberID=@id";
+                //param = new SqlParameter("@id", id);
+                //db.Database.ExecuteSqlCommand(query, param);
+
+                //Delete team
+                query = "delete from teams where TeamID=@id";
+                param = new MySqlParameter("@id", id);
+                db.Database.ExecuteSqlCommand(query, param);
+
+                TempData["DeleteSuccess"] = "Team successfully deleted";
+                return RedirectToAction("List");
             }
-            string query;
-            MySqlParameter param = new MySqlParameter("@id", id);
-
-            /* 
-             Structure taken from MemberController where all of the members characters would be deleted.
-             Not sure if this is needed for teams as I wish to keep members and asign them to new teams.
-             */
-            ////Delete associated characters
-            //query = "delete from characters where member_MemberID=@id";
-            //param = new SqlParameter("@id", id);
-            //db.Database.ExecuteSqlCommand(query, param);
-
-            //Delete team
-            query = "delete from teams where TeamID=@id";
-            param = new MySqlParameter("@id", id);
-            db.Database.ExecuteSqlCommand(query, param);
-            return RedirectToAction("List");
+            else
+            {
+                TempData["DeleteFail"] = "Failed to delete team";
+                return RedirectToAction("List");
+            }
 
         }
 
