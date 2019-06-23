@@ -16,6 +16,8 @@ June 23, 2019
 - Fixed error in deleting a team if members are still in it
    - Puts all members in deleting team to default "Unassigned" team
    - Removed ability to delete "Unassigned" team
+   
+- Added banners to pages
 
 June 22, 2019
 - Implemented user authorization. Any person visiting the site can see the member list and team list but to view details they must be logged in and a "member" of the guild. Database post functionality is locked to the "administrator" role.
