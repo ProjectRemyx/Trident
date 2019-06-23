@@ -2,6 +2,20 @@
 @{
     ViewBag.Title = "Show";
 }
+
+@if (TempData["EditSuccess"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <strong>Character edited!</strong>
+    </div>
+}
+else if (TempData["EditFail"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Failed to edit character</strong>
+    </div>
+}
+
 <div class="container body-content">
     <h2>@Model.CharacterName</h2>
 

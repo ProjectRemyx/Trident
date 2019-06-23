@@ -15,6 +15,32 @@ else if (TempData["EditFail"] != null)
         <strong>Failed to edit member</strong>
     </div>
 }
+@*Adding a character alerts*@
+else if (TempData["AddSuccess"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <strong>Character added</strong>
+    </div>
+}
+else if (TempData["AddFail"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Failed to add character</strong>
+    </div>
+}
+@*Deleting a character alerts*@
+else if (TempData["DeleteSuccess"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        <strong>Character deleted</strong>
+    </div>
+}
+else if (TempData["DeleteFail"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        <strong>Failed to delete character</strong>
+    </div>
+}
 
 <div class="container body-content">
     <h2>@Model.MemberName</h2>
