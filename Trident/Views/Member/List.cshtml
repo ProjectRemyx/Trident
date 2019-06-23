@@ -27,16 +27,16 @@
             @{ int rowNo = 0;}
             @foreach (var member in Model)
             {
-                <tr>
-                    <th scope="row">@{rowNo++;} @rowNo</th>
-                    <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
-                    <td>@member.MemberLevel</td>
-                    <td>@member.MemberSpecialty</td>
-                    <td>@member.MemberStrikes</td>
-                    <td>@member.Characters.Count()</td>
-                    <td>@member.team.TeamName</td>
-                    <td><a href="@Url.Action("Delete/" + member.MemberID)">Delete</a></td>
-                </tr>
+            <tr>
+                <th scope="row">@{rowNo++;} @rowNo</th>
+                <td>@Html.ActionLink(member.MemberName, "Show/" + member.MemberID)</td>
+                <td>@member.MemberLevel</td>
+                <td>@member.MemberSpecialty</td>
+                <td>@member.MemberStrikes</td>
+                <td>@member.Characters.Count()</td>
+                <td>@member.team.TeamName</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = member.MemberID }, new { onclick = "return confirm('Are you sure you want to delete this member?');" })</td>
+            </tr>
             }
         </tbody>
     </table>

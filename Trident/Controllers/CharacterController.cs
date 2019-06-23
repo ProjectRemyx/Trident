@@ -118,14 +118,14 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int mid)
         {
             string query = "delete from characters where characterid = @id";
             db.Database.ExecuteSqlCommand(query, new MySqlParameter("@id", id));
 
             //How to redirect to another controller referenced from the following link
             //https://stackoverflow.com/questions/10785245/redirect-to-action-in-another-controller
-            return RedirectToAction("List", "Member", new { area = "" });
+            return RedirectToAction("Show/" + mid, "Member");
         }
 
     }

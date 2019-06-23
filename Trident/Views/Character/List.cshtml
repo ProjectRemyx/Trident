@@ -22,14 +22,14 @@
             @{ int rowNo = 0;}
             @foreach (var character in Model)
             {
-                <tr>
-                    <th scope="row">@{rowNo++;} @rowNo</th>
-                    <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
-                    <td>@character.CharacterWeapon</td>
-                    <td>@character.CharacterTreasure</td>
-                    <td>@character.member.MemberName</td>
-                    <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
-                </tr>
+            <tr>
+                <th scope="row">@{rowNo++;} @rowNo</th>
+                <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
+                <td>@character.CharacterWeapon</td>
+                <td>@character.CharacterTreasure</td>
+                <td>@character.member.MemberName</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = character.CharacterID }, new { onclick = "return confirm('Are you sure you want to delete this character?');" })</td>
+            </tr>
             }
         </tbody>
     </table>

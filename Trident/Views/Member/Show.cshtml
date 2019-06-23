@@ -10,6 +10,9 @@
     <form method="get" action="/Member/Edit/@Model.MemberID">
         <button type="submit" class="btn btn-primary">Edit Member</button>
     </form>
+    <div class="member-show-team">
+        <h3>Assigned to: @Model.team.TeamName</h3>
+    </div>
     <div id="characterList">
         <h3>Characters:</h3>
         <form method="get" action="/Character/New">
@@ -28,13 +31,13 @@
                 @{ int rowNo = 0;}
                 @foreach (var character in Model.Characters)
                 {
-                    <tr>
-                        <th scope="row">@{rowNo++;} @rowNo</th>
-                        <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
-                        <td>@character.CharacterWeapon</td>
-                        <td>@character.CharacterTreasure</td>
-                        <td><a href="@Url.Action("Delete/" + character.CharacterID, "Character")">Delete</a></td>
-                    </tr>
+                <tr>
+                    <th scope="row">@{rowNo++;} @rowNo</th>
+                    <td>@Html.ActionLink(character.CharacterName, "Show/" + character.CharacterID, "Character")</td>
+                    <td>@character.CharacterWeapon</td>
+                    <td>@character.CharacterTreasure</td>
+                    <td>@Html.ActionLink("Delete", "Delete", "Character", new { id = character.CharacterID, mid = Model.MemberID }, new { onclick = "return confirm('Are you sure you want to delete this character?');" })</td>
+                </tr>
                 }
             </tbody>
         </table>

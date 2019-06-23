@@ -21,7 +21,8 @@
             <tr>
                 <td>@Model.CharacterWeapon</td>
                 <td>@Model.CharacterTreasure</td>
-                <td>@Model.member.MemberName</td>
+                @*<td>@Model.member.MemberName</td>*@
+                <td>@Html.ActionLink(Model.member.MemberName, "Show/" + Model.member.MemberID, "Member")</td>
             </tr>
         </tbody>
     </table>
