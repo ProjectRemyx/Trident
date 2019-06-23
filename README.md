@@ -3,14 +3,19 @@ A guild application to hold users, assign them to a teams as well as track their
 
 Changelog Trident .NET Application (4.7 / MVC5 / EF6)
 
+June 23, 2019
+- Added validation to forms
+
+- Fixed error in deleting a team if members are still in it
+   - Puts all members in deleting team to default "Unassigned" team
+   - Removed ability to delete "Unassigned" team
+
 June 22, 2019
 - Implemented user authorization. Any person visiting the site can see the member list and team list but to view details they must be logged in and a "member" of the guild. Database post functionality is locked to the "administrator" role.
 
 - Added delete confirmation messages
 
 - Added success/error messages on successful post actions
-
-- Added validation to forms
 
 - Fixed routes for better UX
 
