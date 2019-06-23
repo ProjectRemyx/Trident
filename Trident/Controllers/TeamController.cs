@@ -148,15 +148,12 @@ namespace Trident.Controllers
                 }
                 string query;
                 MySqlParameter param = new MySqlParameter("@id", id);
+                MySqlParameter team_param = new MySqlParameter("@tid", id);
 
-                /* 
-                 Structure taken from MemberController where all of the members characters would be deleted.
-                 Not sure if this is needed for teams as I wish to keep members and asign them to new teams.
-                 */
-                ////Delete associated characters
-                //query = "delete from characters where member_MemberID=@id";
-                //param = new SqlParameter("@id", id);
-                //db.Database.ExecuteSqlCommand(query, param);
+                //Fix foreign key mismatch
+                query = "update members set team_TeamID = 19 WHERE team_TeamID=@tid";
+                team_param = new MySqlParameter("@tid", id);
+                db.Database.ExecuteSqlCommand(query, team_param);
 
                 //Delete team
                 query = "delete from teams where TeamID=@id";

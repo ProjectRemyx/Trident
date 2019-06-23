@@ -54,7 +54,14 @@ else if (TempData["DeleteFail"] != null)
                     <td>@team.TeamRep</td>
                     <td>@team.TeamType</td>
                     <td>@team.Members.Count()</td>
+                    @if(team.TeamName == "Unassigned")
+                    {
+                        <td></td>
+                    }
+                    else
+                    {
                     <td>@Html.ActionLink("Delete", "Delete", new { id = team.TeamID }, new { onclick = "return confirm('Are you sure you want to delete this team?');" })</td>
+                    }
                 </tr>
             }
         </tbody>
