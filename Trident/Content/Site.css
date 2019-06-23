@@ -3,8 +3,16 @@
     padding-bottom: 20px;
 }
 
+.error{
+    color: red;
+}
+
 .alert{
     margin-top: 5em !important;
+}
+
+.validation-summary-valid {
+    display: none !important;
 }
 
 .back-to-list{

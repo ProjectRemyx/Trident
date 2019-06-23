@@ -40,29 +40,39 @@ namespace Trident.Controllers
         [HttpPost]
         public ActionResult Create(string TeamName_New, string TeamRep_New, string TeamType_New)
         {
-            if(ModelState.IsValid)
+            if (TeamName_New == "")
             {
-                //Query string
-                string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
+                if (TeamName_New == "") TempData["teamNameError"] = MvcHtmlString.Create("Team name required. <br/>");
 
-                //Parameters for the query
-                MySqlParameter[] myParams = new MySqlParameter[3];
-                myParams[0] = new MySqlParameter("@name", TeamName_New);
-                myParams[1] = new MySqlParameter("@rep", TeamRep_New);
-                myParams[2] = new MySqlParameter("@type", TeamType_New);
-
-                //Execute Query
-                db.Database.ExecuteSqlCommand(query, myParams);
-
-                TempData["AddSuccess"] = "Team successfully added";
-                //Re-direct to list of members
-                return RedirectToAction("List");
+                return RedirectToAction("New");
             }
             else
             {
-                TempData["AddFail"] = "Failed to add team";
-                //Re-direct to list of members
-                return RedirectToAction("List");
+                if (ModelState.IsValid)
+                {
+                    //Query string
+                    string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
+
+                    //Parameters for the query
+                    MySqlParameter[] myParams = new MySqlParameter[3];
+                    myParams[0] = new MySqlParameter("@name", TeamName_New);
+                    myParams[1] = new MySqlParameter("@rep", TeamRep_New);
+                    myParams[2] = new MySqlParameter("@type", TeamType_New);
+
+                    //Execute Query
+                    db.Database.ExecuteSqlCommand(query, myParams);
+
+                    TempData["AddSuccess"] = "Team successfully added";
+                    //Re-direct to list of members
+                    return RedirectToAction("List");
+                }
+                else
+                {
+                    TempData["AddFail"] = "Failed to add team";
+                    //Re-direct to list of members
+                    return RedirectToAction("List");
+                }
+
             }
         }
 
@@ -96,7 +106,13 @@ namespace Trident.Controllers
         [HttpPost]
         public ActionResult Edit(int id, string TeamName, string TeamRep, string TeamType)
         {
-            if(ModelState.IsValid)
+            if (TeamName == "")
+            {
+                if (TeamName == "") TempData["teamNameError"] = MvcHtmlString.Create("Team name required. <br/>");
+
+                return RedirectToAction("Edit/" + id);
+            }
+            if (ModelState.IsValid)
             {
                 if ((id == null) || (db.Teams.Find(id) == null))
                 {

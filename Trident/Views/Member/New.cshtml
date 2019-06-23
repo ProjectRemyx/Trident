@@ -1,12 +1,15 @@
 ﻿@*@model IEnumerable<Trident.Models.Team>*@
 @model Trident.Models.ViewModels.MemberEdit
-    @{
-        ViewBag.Title = "New";
-    }
+@{
+    ViewBag.Title = "New";
+}
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <div class="container body-content">
     <h2>New Member</h2>
+    <span id="validation"></span>
     @*Goes to Create ActionResult in MemberController when submitted*@
-    <form method="post" action="/Member/Create">
+    <form method="post" action="/Member/Create" name="memberForm">
         <div class="form-group">
             <label for="MemberTeam_New">Team:</label>
             <select class="form-control" id="MemberTeam_New" name="MemberTeam_New">
@@ -20,9 +23,11 @@
             <label for="MemberName_New">Username</label>
             <input type="text" class="form-control" placeholder="Enter username" id="MemberName_New" name="MemberName_New">
         </div>
+        <p class="form-group error">@TempData["memberNameError"]</p>
         <div class="form-group">
             <label for="MemberLevel_New">Level</label>
             <input type="text" class="form-control" placeholder="Level" id="MemberLevel_New" name="MemberLevel_New">
+            <p class="form-group error">@TempData["memberLevelError"]</p>
         </div>
         <div class="form-group">
             <label for="MemberSpecialty_New">Specialty</label>
@@ -42,6 +47,6 @@
                 <option value="3">3</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
     </form>
 </div>

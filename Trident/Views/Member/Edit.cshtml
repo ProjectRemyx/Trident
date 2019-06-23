@@ -22,10 +22,12 @@
             </select>
             <label for="MemberName">Username</label>
             <input type="text" class="form-control" value="@Model.Member.MemberName" id="MemberName" name="MemberName">
+            <p class="form-group error">@TempData["memberNameError"]</p>
         </div>
         <div class="form-group">
             <label for="MemberLevel">Level</label>
             <input type="text" class="form-control" value="@Model.Member.MemberLevel" id="MemberLevel" name="MemberLevel">
+            <p class="form-group error">@TempData["memberLevelError"]</p>
         </div>
         <div class="form-group">
             <label for="MemberSpecialty">Specialty</label>
