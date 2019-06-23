@@ -1,6 +1,13 @@
 # Trident
 A guild application to hold users, assign them to a teams as well as track their units.
 
+Next Steps
+- General styling
+- User testing
+- Expansion of database schema to include in-depth information
+   - Under team add ability to log battles
+   - Each team can have a battles and battles contain scores, characters used, members in the battle, etc
+
 Changelog Trident .NET Application (4.7 / MVC5 / EF6)
 
 June 23, 2019
@@ -26,5 +33,3 @@ May 26, 2019
 - Added Authorization to application without "individual accounts" on project creation
    - Created a 2nd database and migrated the ApplicationDbContext (ASP.NET Users Tables) into the database to create database structure
 
-Next Steps
-   - Integrate User permissions, check if can create an administrative user. If not, create that distinction so that I can allow only administrative users to edit the teams/members/characters. Otherewise, the rest will only be able to have view access. 
