@@ -40,25 +40,25 @@ else if (TempData["DeleteFail"] != null)
 }
 @*Alert Messages End*@
 
-<div class="container body-content">
-    <form method="get" action="/Member/New">
-        <button type="submit" class="btn btn-primary">Add Member</button>
-    </form>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Member</th>
-                <th scope="col">Level</th>
-                <th scope="col">Specialty</th>
-                <th scope="col">Strikes</th>
-                <th scope="col">Character Count</th>
-                <th scope="col">Team</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{ int rowNo = 0;}
-            @foreach (var member in Model)
+    <div class="container body-content">
+        <form method="get" action="/Member/New">
+            <button type="submit" class="btn btn-primary">Add Member</button>
+        </form>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Member</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">Specialty</th>
+                    <th scope="col">Strikes</th>
+                    <th scope="col">Character Count</th>
+                    <th scope="col">Team</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int rowNo = 0;}
+                @foreach (var member in Model)
             {
                 <tr>
                     <th scope="row">@{rowNo++;} @rowNo</th>
@@ -70,7 +70,7 @@ else if (TempData["DeleteFail"] != null)
                     <td>@member.team.TeamName</td>
                     <td>@Html.ActionLink("Delete", "Delete", new { id = member.MemberID }, new { onclick = "return confirm('Are you sure you want to delete this member?');" })</td>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+            </tbody>
+        </table>
+    </div>

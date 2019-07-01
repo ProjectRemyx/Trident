@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Trident.Models;
 using Trident.Models.ViewModels;
 using MySql.Data.MySqlClient;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Trident.Controllers
 {
@@ -17,30 +19,29 @@ namespace Trident.Controllers
         //Run method when no command - Plural members view
         public ActionResult Index()
         {
-            ModelState.Clear();
             return RedirectToAction("List");
         }
 
-        public ActionResult List()
+        public async Task<ActionResult> List()
         {
             //Print out a list of members
-            IEnumerable<Member> members = db.Members.ToList();
+            IEnumerable<Member> members = await db.Members.ToListAsync();
             return View(members);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public ActionResult New()
+        public async Task<ActionResult> New()
         {
             //Connect to db to get list of members
             MemberEdit memberEditView = new MemberEdit();
-            memberEditView.Teams = db.Teams.ToList();
+            memberEditView.Teams = await db.Teams.ToListAsync();
             return View(memberEditView);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Create(string MemberName_New, string MemberLevel_New, string MemberSpecialty_New, int MemberStrikes_New, int? MemberTeam_New)
+        public async Task<ActionResult> Create(string MemberName_New, string MemberLevel_New, string MemberSpecialty_New, int MemberStrikes_New, int? MemberTeam_New)
         {
             if(MemberName_New == "" || MemberLevel_New == "")
             {
@@ -67,7 +68,7 @@ namespace Trident.Controllers
                         myParams[4] = new MySqlParameter("@tid", MemberTeam_New);
 
                         //Execute Query
-                        db.Database.ExecuteSqlCommand(query, myParams);
+                        await db.Database.ExecuteSqlCommandAsync(query, myParams);
 
                         TempData["AddSuccess"] = "Member successfully added";
 
@@ -90,7 +91,7 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Member, Admin")]
-        public ActionResult Show(int? id)
+        public async Task<ActionResult> Show(int? id)
         {
             //If the id doesn't exist or the member doesn't exist
             if((id == null) || (db.Members.Find(id)==null))
@@ -101,23 +102,23 @@ namespace Trident.Controllers
             MySqlParameter[] myParams = new MySqlParameter[1];
             myParams[0] = new MySqlParameter("@id", id);
 
-            Member myMembers = db.Members.SqlQuery(query, myParams).FirstOrDefault();
+            Member myMembers = await db.Members.SqlQuery(query, myParams).FirstOrDefaultAsync();
             return View(myMembers);
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             //Need list of members and the current member
             MemberEdit memberEditView = new MemberEdit();
-            memberEditView.Teams = db.Teams.ToList();
-            memberEditView.Member = db.Members.Find(id);
+            memberEditView.Teams = await db.Teams.ToListAsync();
+            memberEditView.Member = await db.Members.FindAsync(id);
             return View(memberEditView);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Edit(int id, string MemberName, string MemberLevel, string MemberSpecialty, int MemberStrikes, int? MemberTeam)
+        public async Task<ActionResult> Edit(int id, string MemberName, string MemberLevel, string MemberSpecialty, int MemberStrikes, int? MemberTeam)
         {
             if (MemberName == "" || MemberLevel == "")
             {
@@ -145,7 +146,7 @@ namespace Trident.Controllers
                         myParams[4] = new MySqlParameter("@strikes", MemberStrikes);
                         myParams[5] = new MySqlParameter("@tid", MemberTeam);
 
-                        db.Database.ExecuteSqlCommand(query, myParams);
+                        await db.Database.ExecuteSqlCommandAsync(query, myParams);
                         TempData["EditSuccess"] = "Member successfully edited";
                         return RedirectToAction("Show/" + id);
                     }
@@ -165,43 +166,37 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            if(ModelState.IsValid)
+            if ((id == null) || (db.Members.Find(id) == null))
             {
-                if ((id == null) || (db.Members.Find(id) == null))
-                {
-                    return HttpNotFound();
-                }
-                try
-                {
-                    string query;
-                    MySqlParameter param = new MySqlParameter("@id", id);
-
-                    //Delete associated characters
-                    query = "delete from characters where member_MemberID=@id";
-                    param = new MySqlParameter("@id", id);
-                    db.Database.ExecuteSqlCommand(query, param);
-            
-                    //Delete member
-                    query = "delete from members where MemberID=@id";
-                    param = new MySqlParameter("@id", id);
-                    db.Database.ExecuteSqlCommand(query, param);
-
-                    TempData["DeleteSuccess"] = "Member successfully deleted";
-                    return RedirectToAction("List");
-                }
-                catch(Exception err)
-                {
-                    return View(err.Message);
-                }
+                return HttpNotFound();
             }
-            else
+            try
+            {
+                string deleteCharactersQuery;
+                string deleteMemberQuery;
+
+                MySqlParameter param = new MySqlParameter("@id", id);
+
+                //Delete associated characters
+                deleteCharactersQuery = "delete from characters where member_MemberID=@id";
+                param = new MySqlParameter("@id", id);
+                await db.Database.ExecuteSqlCommandAsync(deleteCharactersQuery, param);
+            
+                //Delete member
+                deleteMemberQuery = "delete from members where MemberID=@id";
+                param = new MySqlParameter("@id", id);
+                await db.Database.ExecuteSqlCommandAsync(deleteMemberQuery, param);
+
+                TempData["DeleteSuccess"] = "Member successfully deleted";
+                return RedirectToAction("List");
+            }
+            catch
             {
                 TempData["DeleteFail"] = "Failed to delete member";
                 return RedirectToAction("List");
             }
-
         }
         
     }
