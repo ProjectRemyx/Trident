@@ -242,6 +242,10 @@
     <Compile Include="Migrations\201905270111174_Authentication.Designer.cs">
       <DependentUpon>201905270111174_Authentication.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907010224535_MemberLevelString.cs" />
+    <Compile Include="Migrations\201907010224535_MemberLevelString.Designer.cs">
+      <DependentUpon>201907010224535_MemberLevelString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Character.cs" />
@@ -422,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905270111174_Authentication.resx">
       <DependentUpon>201905270111174_Authentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907010224535_MemberLevelString.resx">
+      <DependentUpon>201907010224535_MemberLevelString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

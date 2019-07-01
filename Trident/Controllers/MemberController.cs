@@ -40,12 +40,12 @@ namespace Trident.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Create(string MemberName_New, int MemberLevel_New, string MemberSpecialty_New, int MemberStrikes_New, int? MemberTeam_New)
+        public ActionResult Create(string MemberName_New, string MemberLevel_New, string MemberSpecialty_New, int MemberStrikes_New, int? MemberTeam_New)
         {
-            if(MemberName_New == "" || MemberLevel_New == null)
+            if(MemberName_New == "" || MemberLevel_New == "")
             {
                 if (MemberName_New == "") TempData["memberNameError"] = MvcHtmlString.Create("Member name required. <br/>");
-                if (MemberLevel_New == null) TempData["memberLevelError"] = MvcHtmlString.Create("Member level required. <br/>");
+                if (MemberLevel_New == "") TempData["memberLevelError"] = MvcHtmlString.Create("Member level required. <br/>");
 
                 return RedirectToAction("New");
             }
@@ -53,24 +53,31 @@ namespace Trident.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //Query string
-                    string query = "insert into members (MemberName, MemberLevel, MemberSpecialty, MemberStrikes, team_TeamID) values (@name, @level, @specialty, @strikes, @tid)";
+                    try
+                    {
+                        //Query string
+                        string query = "insert into members (MemberName, MemberLevel, MemberSpecialty, MemberStrikes, team_TeamID) values (@name, @level, @specialty, @strikes, @tid)";
 
-                    //Parameters for the query
-                    MySqlParameter[] myParams = new MySqlParameter[5];
-                    myParams[0] = new MySqlParameter("@name", MemberName_New);
-                    myParams[1] = new MySqlParameter("@level", MemberLevel_New);
-                    myParams[2] = new MySqlParameter("@specialty", MemberSpecialty_New);
-                    myParams[3] = new MySqlParameter("@strikes", MemberStrikes_New);
-                    myParams[4] = new MySqlParameter("@tid", MemberTeam_New);
+                        //Parameters for the query
+                        MySqlParameter[] myParams = new MySqlParameter[5];
+                        myParams[0] = new MySqlParameter("@name", MemberName_New);
+                        myParams[1] = new MySqlParameter("@level", MemberLevel_New);
+                        myParams[2] = new MySqlParameter("@specialty", MemberSpecialty_New);
+                        myParams[3] = new MySqlParameter("@strikes", MemberStrikes_New);
+                        myParams[4] = new MySqlParameter("@tid", MemberTeam_New);
 
-                    //Execute Query
-                    db.Database.ExecuteSqlCommand(query, myParams);
+                        //Execute Query
+                        db.Database.ExecuteSqlCommand(query, myParams);
 
-                    TempData["AddSuccess"] = "Member successfully added";
+                        TempData["AddSuccess"] = "Member successfully added";
 
-                    //Re-direct to list of members
-                    return RedirectToAction("List");
+                        //Re-direct to list of members
+                        return RedirectToAction("List");
+                    }
+                    catch(Exception err)
+                    {
+                        return View(err.Message);
+                    }
                 }
                 else
                 {
@@ -78,7 +85,7 @@ namespace Trident.Controllers
                     //Re-direct to list of members
                     return RedirectToAction("List");
                 }
-
+                
             }
         }
 
@@ -110,12 +117,12 @@ namespace Trident.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Edit(int id, string MemberName, int MemberLevel, string MemberSpecialty, int MemberStrikes, int? MemberTeam)
+        public ActionResult Edit(int id, string MemberName, string MemberLevel, string MemberSpecialty, int MemberStrikes, int? MemberTeam)
         {
-            if (MemberName == "" || MemberLevel == null)
+            if (MemberName == "" || MemberLevel == "")
             {
                 if (MemberName == "") TempData["memberNameError"] = MvcHtmlString.Create("Member name required. <br/>");
-                if (MemberLevel == null) TempData["memberLevelError"] = MvcHtmlString.Create("Member level required. <br/>");
+                if (MemberLevel == "") TempData["memberLevelError"] = MvcHtmlString.Create("Member level required. <br/>");
 
                 return RedirectToAction("Edit/" + id);
             }
@@ -123,22 +130,29 @@ namespace Trident.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if ((id == null) || (db.Members.Find(id) == null))
+                    try
                     {
-                        return HttpNotFound();
-                    }
-                    string query = "update members set MemberName=@name, MemberLevel=@level, MemberSpecialty=@specialty, MemberStrikes=@strikes, team_TeamID=@tid where MemberID=@id";
-                    MySqlParameter[] myParams = new MySqlParameter[6];
-                    myParams[0] = new MySqlParameter("@name", MemberName);
-                    myParams[1] = new MySqlParameter("@level", MemberLevel);
-                    myParams[2] = new MySqlParameter("@specialty", MemberSpecialty);
-                    myParams[3] = new MySqlParameter("@id", id);
-                    myParams[4] = new MySqlParameter("@strikes", MemberStrikes);
-                    myParams[5] = new MySqlParameter("@tid", MemberTeam);
+                        if (db.Members.Find(id) == null)
+                        {
+                            return HttpNotFound();
+                        }
+                        string query = "update members set MemberName=@name, MemberLevel=@level, MemberSpecialty=@specialty, MemberStrikes=@strikes, team_TeamID=@tid where MemberID=@id";
+                        MySqlParameter[] myParams = new MySqlParameter[6];
+                        myParams[0] = new MySqlParameter("@name", MemberName);
+                        myParams[1] = new MySqlParameter("@level", MemberLevel);
+                        myParams[2] = new MySqlParameter("@specialty", MemberSpecialty);
+                        myParams[3] = new MySqlParameter("@id", id);
+                        myParams[4] = new MySqlParameter("@strikes", MemberStrikes);
+                        myParams[5] = new MySqlParameter("@tid", MemberTeam);
 
-                    db.Database.ExecuteSqlCommand(query, myParams);
-                    TempData["EditSuccess"] = "Member successfully edited";
-                    return RedirectToAction("Show/" + id);
+                        db.Database.ExecuteSqlCommand(query, myParams);
+                        TempData["EditSuccess"] = "Member successfully edited";
+                        return RedirectToAction("Show/" + id);
+                    }
+                    catch(Exception err)
+                    {
+                        return View(err.Message);
+                    }
                 }
                 else
                 {
@@ -159,21 +173,28 @@ namespace Trident.Controllers
                 {
                     return HttpNotFound();
                 }
-                string query;
-                MySqlParameter param = new MySqlParameter("@id", id);
+                try
+                {
+                    string query;
+                    MySqlParameter param = new MySqlParameter("@id", id);
 
-                //Delete associated characters
-                query = "delete from characters where member_MemberID=@id";
-                param = new MySqlParameter("@id", id);
-                db.Database.ExecuteSqlCommand(query, param);
+                    //Delete associated characters
+                    query = "delete from characters where member_MemberID=@id";
+                    param = new MySqlParameter("@id", id);
+                    db.Database.ExecuteSqlCommand(query, param);
             
-                //Delete member
-                query = "delete from members where MemberID=@id";
-                param = new MySqlParameter("@id", id);
-                db.Database.ExecuteSqlCommand(query, param);
+                    //Delete member
+                    query = "delete from members where MemberID=@id";
+                    param = new MySqlParameter("@id", id);
+                    db.Database.ExecuteSqlCommand(query, param);
 
-                TempData["DeleteSuccess"] = "Member successfully deleted";
-                return RedirectToAction("List");
+                    TempData["DeleteSuccess"] = "Member successfully deleted";
+                    return RedirectToAction("List");
+                }
+                catch(Exception err)
+                {
+                    return View(err.Message);
+                }
             }
             else
             {

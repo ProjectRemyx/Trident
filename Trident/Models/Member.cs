@@ -18,7 +18,7 @@ namespace Trident.Models
         public string MemberName { get; set; }
 
         [Required]
-        public int MemberLevel { get; set; }
+        public string MemberLevel { get; set; }
 
         [Required, StringLength(30, ErrorMessage = "Role cannot be longer than 30 characters.")]
         public string MemberSpecialty { get; set; }
