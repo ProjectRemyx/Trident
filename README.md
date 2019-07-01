@@ -10,8 +10,15 @@ Next Steps
 
 Changelog Trident .NET Application (4.7 / MVC5 / EF6)
 
+June 30, 2019
+
+- Added additional error handling in the form of try/catch
+
+- Changed MemberLevel to be a string instead of an int
+   - Fixed validation bug with MemberLevel 
+
 June 23, 2019
-- Added validation to forms
+- Added validation to forms including error handling using ModelState
 
 - Fixed error in deleting a team if members are still in it
    - Puts all members in deleting team to default "Unassigned" team
