@@ -43,19 +43,26 @@ namespace Trident.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //Query string 
-                    string query = "insert into characters(CharacterName, CharacterWeapon, CharacterTreasure, member_MemberID) values (@name, @weapon, @treasure, @mid)";
+                    try
+                    {
+                        //Query string 
+                        string query = "insert into characters(CharacterName, CharacterWeapon, CharacterTreasure, member_MemberID) values (@name, @weapon, @treasure, @mid)";
 
-                    MySqlParameter[] myParams = new MySqlParameter[4];
-                    myParams[0] = new MySqlParameter("@name", CharacterName_New);
-                    myParams[1] = new MySqlParameter("@weapon", CharacterWeapon_New);
-                    myParams[2] = new MySqlParameter("@treasure", CharacterTreasure_New);
-                    myParams[3] = new MySqlParameter("@mid", CharacterMember_New);
+                        MySqlParameter[] myParams = new MySqlParameter[4];
+                        myParams[0] = new MySqlParameter("@name", CharacterName_New);
+                        myParams[1] = new MySqlParameter("@weapon", CharacterWeapon_New);
+                        myParams[2] = new MySqlParameter("@treasure", CharacterTreasure_New);
+                        myParams[3] = new MySqlParameter("@mid", CharacterMember_New);
 
-                    db.Database.ExecuteSqlCommand(query, myParams);
+                        db.Database.ExecuteSqlCommand(query, myParams);
 
-                    TempData["AddSuccess"] = "Character successfully added";
-                    return RedirectToAction("Show/" + CharacterMember_New, "Member");
+                        TempData["AddSuccess"] = "Character successfully added";
+                        return RedirectToAction("Show/" + CharacterMember_New, "Member");
+                    }
+                    catch(Exception err)
+                    {
+                        return View(err.Message);
+                    }
 
                 }
                 else
@@ -116,37 +123,43 @@ namespace Trident.Controllers
                         return HttpNotFound();
                     }
 
-                    string query = "update characters set CharacterName=@name, " +
-                        "CharacterWeapon=@weapon,"+
-                        "CharacterTreasure=@treasure," +
-                        "member_MemberID=@mid where CharacterID=@id";
+                    try
+                    {
+                        string query = "update characters set CharacterName=@name, " +
+                            "CharacterWeapon=@weapon,"+
+                            "CharacterTreasure=@treasure," +
+                            "member_MemberID=@mid where CharacterID=@id";
 
-                    MySqlParameter[] myParams = new MySqlParameter[5];
-                    myParams[0] = new MySqlParameter();
-                    myParams[0].ParameterName = "@name";
-                    myParams[0].Value = CharacterName;
+                        MySqlParameter[] myParams = new MySqlParameter[5];
+                        myParams[0] = new MySqlParameter();
+                        myParams[0].ParameterName = "@name";
+                        myParams[0].Value = CharacterName;
 
-                    myParams[1] = new MySqlParameter();
-                    myParams[1].ParameterName = "@weapon";
-                    myParams[1].Value = CharacterWeapon;
+                        myParams[1] = new MySqlParameter();
+                        myParams[1].ParameterName = "@weapon";
+                        myParams[1].Value = CharacterWeapon;
 
-                    myParams[2] = new MySqlParameter();
-                    myParams[2].ParameterName = "@treasure";
-                    myParams[2].Value = CharacterTreasure;
+                        myParams[2] = new MySqlParameter();
+                        myParams[2].ParameterName = "@treasure";
+                        myParams[2].Value = CharacterTreasure;
 
-                    myParams[3] = new MySqlParameter();
-                    myParams[3].ParameterName = "mid";
-                    myParams[3].Value = CharacterMember;
+                        myParams[3] = new MySqlParameter();
+                        myParams[3].ParameterName = "mid";
+                        myParams[3].Value = CharacterMember;
 
-                    myParams[4] = new MySqlParameter();
-                    myParams[4].ParameterName = "@id";
-                    myParams[4].Value = id;
+                        myParams[4] = new MySqlParameter();
+                        myParams[4].ParameterName = "@id";
+                        myParams[4].Value = id;
 
-                    db.Database.ExecuteSqlCommand(query, myParams);
+                        db.Database.ExecuteSqlCommand(query, myParams);
 
-                    TempData["EditSuccess"] = "Character successfully edited";
-                    return RedirectToAction("Show/" + id);
-                
+                        TempData["EditSuccess"] = "Character successfully edited";
+                        return RedirectToAction("Show/" + id);
+                    }
+                    catch(Exception err)
+                    {
+                        return View(err.Message);
+                    }
                 }
                 else
                 {
@@ -163,14 +176,20 @@ namespace Trident.Controllers
         {
             if(ModelState.IsValid)
             {
-                string query = "delete from characters where characterid = @id";
-                db.Database.ExecuteSqlCommand(query, new MySqlParameter("@id", id));
+                try
+                {
+                    string query = "delete from characters where characterid = @id";
+                    db.Database.ExecuteSqlCommand(query, new MySqlParameter("@id", id));
 
-                //How to redirect to another controller referenced from the following link
-                //https://stackoverflow.com/questions/10785245/redirect-to-action-in-another-controller
-                TempData["DeleteSuccess"] = "Character successfully deleted";
-                return RedirectToAction("Show/" + mid, "Member");
-
+                    //How to redirect to another controller referenced from the following link
+                    //https://stackoverflow.com/questions/10785245/redirect-to-action-in-another-controller
+                    TempData["DeleteSuccess"] = "Character successfully deleted";
+                    return RedirectToAction("Show/" + mid, "Member");
+                }
+                catch(Exception err)
+                {
+                    return View(err.Message);
+                }
             }
             else
             {
