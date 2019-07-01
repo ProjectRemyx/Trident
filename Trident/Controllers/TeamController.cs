@@ -50,21 +50,28 @@ namespace Trident.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //Query string
-                    string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
+                    try
+                    {
+                        //Query string
+                        string query = "insert into teams (TeamName, TeamRep, TeamType) values (@name, @rep, @type)";
 
-                    //Parameters for the query
-                    MySqlParameter[] myParams = new MySqlParameter[3];
-                    myParams[0] = new MySqlParameter("@name", TeamName_New);
-                    myParams[1] = new MySqlParameter("@rep", TeamRep_New);
-                    myParams[2] = new MySqlParameter("@type", TeamType_New);
+                        //Parameters for the query
+                        MySqlParameter[] myParams = new MySqlParameter[3];
+                        myParams[0] = new MySqlParameter("@name", TeamName_New);
+                        myParams[1] = new MySqlParameter("@rep", TeamRep_New);
+                        myParams[2] = new MySqlParameter("@type", TeamType_New);
 
-                    //Execute Query
-                    db.Database.ExecuteSqlCommand(query, myParams);
+                        //Execute Query
+                        db.Database.ExecuteSqlCommand(query, myParams);
 
-                    TempData["AddSuccess"] = "Team successfully added";
-                    //Re-direct to list of members
-                    return RedirectToAction("List");
+                        TempData["AddSuccess"] = "Team successfully added";
+                        //Re-direct to list of members
+                        return RedirectToAction("List");
+                    }
+                    catch(Exception err)
+                    {
+                        return View(err.Message);
+                    }
                 }
                 else
                 {
@@ -114,21 +121,27 @@ namespace Trident.Controllers
             }
             if (ModelState.IsValid)
             {
-                if ((id == null) || (db.Teams.Find(id) == null))
+                try
                 {
-                    return HttpNotFound();
+                    if ((id == null) || (db.Teams.Find(id) == null))
+                    {
+                        return HttpNotFound();
+                    }
+                    string query = "update teams set TeamName=@name, TeamRep=@rep, TeamType=@type where TeamID=@id";
+                    MySqlParameter[] myParams = new MySqlParameter[4];
+                    myParams[0] = new MySqlParameter("@name", TeamName);
+                    myParams[1] = new MySqlParameter("@rep", TeamRep);
+                    myParams[2] = new MySqlParameter("@type", TeamType);
+                    myParams[3] = new MySqlParameter("@id", id);
+
+                    db.Database.ExecuteSqlCommand(query, myParams);
+                    TempData["EditSuccess"] = "Team successfully edited";
+                    return RedirectToAction("Show/" + id);
                 }
-                string query = "update teams set TeamName=@name, TeamRep=@rep, TeamType=@type where TeamID=@id";
-                MySqlParameter[] myParams = new MySqlParameter[4];
-                myParams[0] = new MySqlParameter("@name", TeamName);
-                myParams[1] = new MySqlParameter("@rep", TeamRep);
-                myParams[2] = new MySqlParameter("@type", TeamType);
-                myParams[3] = new MySqlParameter("@id", id);
-
-                db.Database.ExecuteSqlCommand(query, myParams);
-                TempData["EditSuccess"] = "Team successfully edited";
-                return RedirectToAction("Show/" + id);
-
+                catch(Exception err)
+                {
+                    return View(err.Message);
+                }
             }
             else
             {
@@ -146,22 +159,29 @@ namespace Trident.Controllers
                 {
                     return HttpNotFound();
                 }
-                string query;
-                MySqlParameter param = new MySqlParameter("@id", id);
-                MySqlParameter team_param = new MySqlParameter("@tid", id);
+                try
+                {
+                    string query;
+                    MySqlParameter param = new MySqlParameter("@id", id);
+                    MySqlParameter team_param = new MySqlParameter("@tid", id);
 
-                //Fix foreign key mismatch
-                query = "update members set team_TeamID = 19 WHERE team_TeamID=@tid";
-                team_param = new MySqlParameter("@tid", id);
-                db.Database.ExecuteSqlCommand(query, team_param);
+                    //Fix foreign key mismatch
+                    query = "update members set team_TeamID = 19 WHERE team_TeamID=@tid";
+                    team_param = new MySqlParameter("@tid", id);
+                    db.Database.ExecuteSqlCommand(query, team_param);
 
-                //Delete team
-                query = "delete from teams where TeamID=@id";
-                param = new MySqlParameter("@id", id);
-                db.Database.ExecuteSqlCommand(query, param);
+                    //Delete team
+                    query = "delete from teams where TeamID=@id";
+                    param = new MySqlParameter("@id", id);
+                    db.Database.ExecuteSqlCommand(query, param);
 
-                TempData["DeleteSuccess"] = "Team successfully deleted";
-                return RedirectToAction("List");
+                    TempData["DeleteSuccess"] = "Team successfully deleted";
+                    return RedirectToAction("List");
+                }
+                catch(Exception err)
+                {
+                    return View(err.Message);
+                }
             }
             else
             {
