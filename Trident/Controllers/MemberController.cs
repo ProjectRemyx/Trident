@@ -27,6 +27,7 @@ namespace Trident.Controllers
             //Print out a list of members
             IEnumerable<Member> members = await db.Members.ToListAsync();
             return View(members);
+
         }
 
         [Authorize(Roles = "Admin")]
@@ -94,7 +95,7 @@ namespace Trident.Controllers
         public async Task<ActionResult> Show(int? id)
         {
             //If the id doesn't exist or the member doesn't exist
-            if((id == null) || (db.Members.Find(id)==null))
+            if((id == null) || (await db.Members.FindAsync(id)==null))
             {
                 return HttpNotFound();
             }
@@ -133,7 +134,7 @@ namespace Trident.Controllers
                 {
                     try
                     {
-                        if (db.Members.Find(id) == null)
+                        if (await db.Members.FindAsync(id) == null)
                         {
                             return HttpNotFound();
                         }

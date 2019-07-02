@@ -8,6 +8,8 @@ using Trident.Models;
 using Trident.Models.ViewModels;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Trident.Controllers
 {
@@ -24,14 +26,14 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult New()
+        public async Task<ActionResult> New()
         {
-            return View(db.Members.ToList());
+            return View(await db.Members.ToListAsync());
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Create(string CharacterName_New, int CharacterWeapon_New, int CharacterTreasure_New, int? CharacterMember_New)
+        public async Task<ActionResult> Create(string CharacterName_New, int CharacterWeapon_New, int CharacterTreasure_New, int? CharacterMember_New)
         {
             if (CharacterName_New == "")
             {
@@ -54,7 +56,7 @@ namespace Trident.Controllers
                         myParams[2] = new MySqlParameter("@treasure", CharacterTreasure_New);
                         myParams[3] = new MySqlParameter("@mid", CharacterMember_New);
 
-                        db.Database.ExecuteSqlCommand(query, myParams);
+                        await db.Database.ExecuteSqlCommandAsync(query, myParams);
 
                         TempData["AddSuccess"] = "Character successfully added";
                         return RedirectToAction("Show/" + CharacterMember_New, "Member");
@@ -75,24 +77,24 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Member, Admin")]
-        public ActionResult Show(int id)
+        public async Task<ActionResult> Show(int id)
         {
             string query = "select * from characters where characterid = @id";
-            return View(db.Characters.SqlQuery(query, new MySqlParameter("@id", id)).FirstOrDefault());
+            return View(await db.Characters.SqlQuery(query, new MySqlParameter("@id", id)).FirstOrDefaultAsync());
         }
 
         [Authorize(Roles = "Member, Admin")]
-        public ActionResult List()
+        public async Task<ActionResult> List()
         {
-            return View(db.Characters.ToList());
+            return View(await db.Characters.ToListAsync());
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
             CharacterEdit characterEdit = new CharacterEdit();
-            characterEdit.character = db.Characters.Find(id);
-            characterEdit.members = db.Members.ToList();
+            characterEdit.character = await db.Characters.FindAsync(id);
+            characterEdit.members = await db.Members.ToListAsync();
             
             if(characterEdit.character != null)
             {
@@ -106,7 +108,7 @@ namespace Trident.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Edit(int? id, string CharacterName, int CharacterWeapon, int CharacterTreasure, int? CharacterMember)
+        public async Task<ActionResult> Edit(int? id, string CharacterName, int CharacterWeapon, int CharacterTreasure, int? CharacterMember)
         {
             if (CharacterName == "")
             {
@@ -118,7 +120,7 @@ namespace Trident.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if ((id == null) || (db.Characters.Find(id) == null))
+                    if ((id == null) || (await db.Characters.FindAsync(id) == null))
                     {
                         return HttpNotFound();
                     }
@@ -151,7 +153,7 @@ namespace Trident.Controllers
                         myParams[4].ParameterName = "@id";
                         myParams[4].Value = id;
 
-                        db.Database.ExecuteSqlCommand(query, myParams);
+                        await db.Database.ExecuteSqlCommandAsync(query, myParams);
 
                         TempData["EditSuccess"] = "Character successfully edited";
                         return RedirectToAction("Show/" + id);
@@ -172,30 +174,23 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int id, int mid)
+        public async Task<ActionResult> Delete(int id, int mid)
         {
-            if(ModelState.IsValid)
-            {
                 try
                 {
                     string query = "delete from characters where characterid = @id";
-                    db.Database.ExecuteSqlCommand(query, new MySqlParameter("@id", id));
+                    await db.Database.ExecuteSqlCommandAsync(query, new MySqlParameter("@id", id));
 
                     //How to redirect to another controller referenced from the following link
                     //https://stackoverflow.com/questions/10785245/redirect-to-action-in-another-controller
                     TempData["DeleteSuccess"] = "Character successfully deleted";
                     return RedirectToAction("Show/" + mid, "Member");
                 }
-                catch(Exception err)
+                catch
                 {
-                    return View(err.Message);
+                    TempData["DeleteFail"] = "Failed to delete character";
+                    return RedirectToAction("Show/" + mid, "Member");
                 }
-            }
-            else
-            {
-                TempData["DeleteFail"] = "Failed to delete character";
-                return RedirectToAction("Show/" + mid, "Member");
-            }
         }
 
     }
