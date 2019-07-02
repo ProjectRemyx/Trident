@@ -10,8 +10,11 @@ Next Steps
 
 Changelog Trident .NET Application (4.7 / MVC5 / EF6)
 
-June 30, 2019
+July 1, 2019
+- Added async/await architecture controllers
+- Added output caching placeholder
 
+June 30, 2019
 - Added additional error handling in the form of try/catch
 
 - Changed MemberLevel to be a string instead of an int
