@@ -22,6 +22,7 @@ namespace Trident.Controllers
             return RedirectToAction("List");
         }
 
+        [OutputCache(Duration = 10, VaryByParam = "none")] //Look into SqlDependency using HostGator
         public async Task<ActionResult> List()
         {
             //Print out a list of members

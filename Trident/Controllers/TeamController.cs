@@ -22,6 +22,7 @@ namespace Trident.Controllers
             return RedirectToAction("List");
         }
 
+        [OutputCache(Duration = 10, VaryByParam = "none")] //Look into SqlDependency using HostGator
         public async Task<ActionResult> List()
         {
             //Print out a list of teams
@@ -85,6 +86,7 @@ namespace Trident.Controllers
             }
         }
 
+        [OutputCache(Duration = 20, VaryByParam = "id;")]
         [Authorize(Roles = "Member, Admin")]
         public async Task<ActionResult> Show(int? id)
         {
