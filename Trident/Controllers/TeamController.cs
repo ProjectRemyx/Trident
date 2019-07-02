@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Trident.Models;
 using Trident.Models.ViewModels;
 using MySql.Data.MySqlClient;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Trident.Controllers
 {
@@ -20,25 +22,25 @@ namespace Trident.Controllers
             return RedirectToAction("List");
         }
 
-        public ActionResult List()
+        public async Task<ActionResult> List()
         {
             //Print out a list of teams
-            IEnumerable<Team> teams = db.Teams.ToList();
+            IEnumerable<Team> teams = await db.Teams.ToListAsync();
             return View(teams);
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult New()
+        public async Task<ActionResult> New()
         {
             //Connect to db to get list of teams
             TeamEdit teamEditView = new TeamEdit();
-            teamEditView.Members = db.Members.ToList();
+            teamEditView.Members = await db.Members.ToListAsync();
             return View(teamEditView);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Create(string TeamName_New, string TeamRep_New, string TeamType_New)
+        public async Task<ActionResult> Create(string TeamName_New, string TeamRep_New, string TeamType_New)
         {
             if (TeamName_New == "")
             {
@@ -62,7 +64,7 @@ namespace Trident.Controllers
                         myParams[2] = new MySqlParameter("@type", TeamType_New);
 
                         //Execute Query
-                        db.Database.ExecuteSqlCommand(query, myParams);
+                        await db.Database.ExecuteSqlCommandAsync(query, myParams);
 
                         TempData["AddSuccess"] = "Team successfully added";
                         //Re-direct to list of members
@@ -84,10 +86,10 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Member, Admin")]
-        public ActionResult Show(int? id)
+        public async Task<ActionResult> Show(int? id)
         {
             //If the id doesn't exist or the member doesn't exist
-            if ((id == null) || (db.Teams.Find(id) == null))
+            if ((id == null) || (await db.Teams.FindAsync(id) == null))
             {
                 return HttpNotFound();
             }
@@ -95,23 +97,23 @@ namespace Trident.Controllers
             MySqlParameter[] myParams = new MySqlParameter[1];
             myParams[0] = new MySqlParameter("@id", id);
 
-            Team myTeams = db.Teams.SqlQuery(query, myParams).FirstOrDefault();
+            Team myTeams = await db.Teams.SqlQuery(query, myParams).FirstOrDefaultAsync();
             return View(myTeams);
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             //Need list of teams and the current team
             TeamEdit teamEditView = new TeamEdit();
-            teamEditView.Members = db.Members.ToList();
-            teamEditView.Team = db.Teams.Find(id);
+            teamEditView.Members = await db.Members.ToListAsync();
+            teamEditView.Team = await db.Teams.FindAsync(id);
             return View(teamEditView);
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Edit(int id, string TeamName, string TeamRep, string TeamType)
+        public async Task<ActionResult> Edit(int id, string TeamName, string TeamRep, string TeamType)
         {
             if (TeamName == "")
             {
@@ -123,7 +125,7 @@ namespace Trident.Controllers
             {
                 try
                 {
-                    if ((id == null) || (db.Teams.Find(id) == null))
+                    if ((id == null) || (await db.Teams.FindAsync(id) == null))
                     {
                         return HttpNotFound();
                     }
@@ -134,7 +136,7 @@ namespace Trident.Controllers
                     myParams[2] = new MySqlParameter("@type", TeamType);
                     myParams[3] = new MySqlParameter("@id", id);
 
-                    db.Database.ExecuteSqlCommand(query, myParams);
+                    await db.Database.ExecuteSqlCommandAsync(query, myParams);
                     TempData["EditSuccess"] = "Team successfully edited";
                     return RedirectToAction("Show/" + id);
                 }
@@ -151,29 +153,30 @@ namespace Trident.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
             if(ModelState.IsValid)
             {
-                if ((id == null) || (db.Teams.Find(id) == null))
+                if ((id == null) || (await db.Teams.FindAsync(id) == null))
                 {
                     return HttpNotFound();
                 }
                 try
                 {
-                    string query;
+                    string updateMemberQuery;
+                    string deleteTeamQuery;
                     MySqlParameter param = new MySqlParameter("@id", id);
                     MySqlParameter team_param = new MySqlParameter("@tid", id);
 
-                    //Fix foreign key mismatch
-                    query = "update members set team_TeamID = 19 WHERE team_TeamID=@tid";
+                    //Fix foreign key mismatch 
+                    updateMemberQuery = "update members set team_TeamID = 19 WHERE team_TeamID=@tid";
                     team_param = new MySqlParameter("@tid", id);
-                    db.Database.ExecuteSqlCommand(query, team_param);
-
+                    await db.Database.ExecuteSqlCommandAsync(updateMemberQuery, team_param);
+                     
                     //Delete team
-                    query = "delete from teams where TeamID=@id";
+                    deleteTeamQuery = "delete from teams where TeamID=@id";
                     param = new MySqlParameter("@id", id);
-                    db.Database.ExecuteSqlCommand(query, param);
+                    await db.Database.ExecuteSqlCommandAsync(deleteTeamQuery, param);
 
                     TempData["DeleteSuccess"] = "Team successfully deleted";
                     return RedirectToAction("List");
