@@ -19,6 +19,6 @@ body {
     background-image: url("../imgs/banners/DarkerMysticalForest.jpg");
 }
 
-.wrapper{
-    padding: 0;
+.wrapper {
+    padding-left: 0.5em;
 }

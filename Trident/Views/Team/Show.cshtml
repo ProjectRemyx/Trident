@@ -7,6 +7,8 @@
 @section scripts
 {
     <link href="~/Content/members.css" rel="stylesheet" asp-file-version="true" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="~/Scripts/stats.js"></script>
 }
 
 <div class="banner flex-container ShowBanner">
@@ -59,6 +61,8 @@ else if (TempData["EditFail"] != null)
                 }
             </tbody>
         </table>
+    </div>
+    <div id="bar-chart">
     </div>
 </div>
 <div class="container back-to-list">
