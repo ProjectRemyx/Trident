@@ -7,8 +7,11 @@ Next Steps
 - Expansion of database schema to include in-depth information
    - Under team add ability to log battles
    - Each team can have a battles and battles contain scores, characters used, members in the battle, etc
+- Change database team schema to include battle results logging and input data to d3.js to show chart analytics
 
 Changelog Trident .NET Application (4.7 / MVC5 / EF6)
+July 7, 2019
+- Added d3.js to team view to show analytics of performance
 
 July 1, 2019
 - Added async/await architecture controllers
